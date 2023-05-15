@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="由于web安全相关的知识比较庞杂，所以学习的方面比较广。这里是根据极客方舟推出的学习视频总结的一些知识点，方便记忆理解">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="由于web安全相关的知识比较庞杂，所以学习的方面比较广。这里是根据极客方舟推出的学习视频总结的一些知识点，方便记忆理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关web的一些基础知识">
+<meta property="og:url" content="http://yankel.github.com/2019/08/25/%E6%9C%89%E5%85%B3web%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="由于web安全相关的知识比较庞杂，所以学习的方面比较广。这里是根据极客方舟推出的学习视频总结的一些知识点，方便记忆理解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/25/mgUKSO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/08/25/mgamHs.png">
+<meta property="article:published_time" content="2019-08-25T06:36:42.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:53:58.655Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/08/25/mgUKSO.png">
+  
+  <title>有关web的一些基础知识 - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="有关web的一些基础知识">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-08-25 14:36" pubdate>
+        2019年8月25日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">有关web的一些基础知识</h1>
+            
+            <div class="markdown-body">
+              <p>由于web安全相关的知识比较庞杂，所以学习的方面比较广。这里是根据极客方舟推出的学习视频总结的一些知识点，方便记忆理解</p>
+<span id="more"></span>
+
+<h1 id="有关web的一些基础知识"><a href="#有关web的一些基础知识" class="headerlink" title="有关web的一些基础知识"></a>有关web的一些基础知识</h1><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和HTTP的、全球性的、动态交互的、跨平台的分布式图形信息系统。是建立在Internet上的一种网络服务，为浏览者在Internet上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将Internet上的信息节点组织成一个互为关联的网状结构。</p>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>前端即<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%AB%99%E5%89%8D%E5%8F%B0/4849916">网站前台</a>部分，运行在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/PC/107">PC</a>端，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A7%BB%E5%8A%A8/8464874">移动</a>端等浏览器上展现给用户浏览的网页。随着<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/617749">互联网技术</a>的发展，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTML5/4234903">HTML5</a>，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CSS3/4059544">CSS3</a>，前端框架的应用，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B7%A8%E5%B9%B3%E5%8F%B0/8558902">跨平台</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/2519669">响应式网页设计</a>能够适应各种屏幕分辨率，完美的动效设计，给用户带来极高的用户体验。</p>
+<h3 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h3><p>HTML、CSS、JavaScript</p>
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><p>后端就是你直接看不到的东西<br>  • 其实就是部署在服务器上的一个程序</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>数据库是以一定方式储存在一起、能与多个用户共享、具有尽可能小的冗余度、与应用程序彼此独立的数据集合，可视为电子化的文件柜——存储电子文件的处所，用户可以对文件中的数据进行新增、查询、更新、删除等操作。</p>
+<p><img src="https://s2.ax1x.com/2019/08/25/mgUKSO.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2><p> 前端、后端、协议、数据库，出现问题</p>
+<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571">服务器</a>，也称伺服器，是提供计算服务的设备。由于服务器需要响应服务请求，并进行处理，因此一般来说服务器应具备承担服务并且保障服务的能力。服务器的构成包括<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%84%E7%90%86%E5%99%A8/914419">处理器</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A1%AC%E7%9B%98/159825">硬盘</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AD%98/103614">内存</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%B3%BB%E7%BB%9F">系统</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%80%BB%E7%BA%BF">总线</a>等，和通用的计算机架构类似，但是由于需要提供高可靠的服务，因此在处理能力、稳定性、可靠性、安全性、可扩展性、可管理性等方面要求较高。</p>
+<p>简单的说，服务器和电脑功能都是一样的，我们也可以讲服务器称之为电脑，只是服务器对稳定性与安全性以及处理器数据能力有更高要求</p>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p>IP，全称互联网协议地址，是指IP地址，意思是分配给用户上网使用的网际协议（英语：InternetProtocol,IP）的设备的数字标签。常见的IP地址分为IPv4与IPv6两大类，但是也有其他不常用的小分类。全球唯一</p>
+<p>地址格式为：IP地址&#x3D;<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80">网络地址</a>+<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E6%9C%BA%E5%9C%B0%E5%9D%80">主机地址</a>或 IP地址&#x3D;<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80">网络地址</a>+<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%90%E7%BD%91">子网</a>地址+主机地址</p>
+<p>根据用途和安全性级别的不同，IP地址还可以大致分为两类：公共地址和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A7%81%E6%9C%89%E5%9C%B0%E5%9D%80">私有地址</a>。公共地址在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Internet">Internet</a>中使用，可以在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Internet">Internet</a>中随意访问。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A7%81%E6%9C%89%E5%9C%B0%E5%9D%80">私有地址</a>只能在内部网络中使用，只有通过<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8">代理服务器</a>才能与Internet通信。</p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>“<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AB%AF%E5%8F%A3">端口</a>“是英文port的意译，可以认为是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%BE%E5%A4%87/3794003">设备</a>与外界通讯交流的出口。端口可分为虚拟端口和物理端口，其中<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F/10866735">虚拟</a>端口指计算机内部或交换机路由器内的端口，不可见。例如计算机中的80端口、21端口、23端口等。物理端口又称为接口，是可见端口，计算机背板的RJ45网口，交换机路由器集线器等RJ45端口。电话使用RJ11插口也属于物理端口的范畴。</p>
+<p>电脑运行的系统程序，其实就像一个闭合的圆圈，但是电脑是为人服务的，他需要接受一些指令，并且要按照指令调整系统功能来工作，于是系统程序设计者，就把这个圆圈截成好多段，这些线段接口就叫端口（通俗讲是断口，就是中断），系统运行到这些端口时，一看端口是否打开或关闭，如果关闭，就是绳子接通了，系统往下运行，如果端口是打开的，系统就得到命令，有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE">外部数据</a>输入，接受外部数据并执行</p>
+<h2 id="局域网、广域网"><a href="#局域网、广域网" class="headerlink" title="局域网、广域网"></a>局域网、广域网</h2><p><strong>广域网</strong>（Wide Area Network，缩写为 WAN），又称<strong>广域网</strong>、<strong>外网</strong>、<strong>公网</strong>。是连接不同地区<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B1%80%E5%9F%9F%E7%BD%91">局域网</a>或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9F%8E%E5%9F%9F%E7%BD%91">城域网</a>计算机通信的远程网。通常跨接很大的物理范围，所覆盖的范围从几十公里到几千公里，它能连接多个地区、城市和国家，或横跨几个洲并能提供远距离通信，形成国际性的远程网络。广域网并不等同于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91">互联网</a>。</p>
+<p><strong>局域网</strong>（**Local Area Network(LAN)**）是一个可连接住宅，学校，实验室，大学校园或办公大楼等有限区域内计算机的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C">计算机网络</a>。相比之下，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%BF%E5%9F%9F%E7%BD%91">广域网</a>（WAN）不仅覆盖较大的地理距离，而且还通常涉及<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9B%BA%E6%8E%A5%E4%B8%93%E7%BA%BF">固接专线</a>和对于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91">互联网</a>的链接。 相比来说<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91">互联网</a>则更为广阔，是连接全球商业和个人计算机的系统。</p>
+<p>• LAN （ Local Area Network）<br>    • 192.168.<em>.</em><br>    • 172.16.<em>.</em> - 172.31.<em>.</em><br>    • 10.<em>.</em>.<br>• WAN （ Metropolitan Area Network </p>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p>url是统一资源定位符，对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它.</p>
+<p>具体来说，常用的URL格式如下：<br>　　协议类型:&#x2F;&#x2F;服务器地址[:端口号]&#x2F;路径&#x2F;文件名[参数&#x3D;值]</p>
+<h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p><strong>MAC地址</strong>（<strong>英语：Media Access Control Address）</strong>，直译为<strong>媒体存取控制位址</strong>，也称为<strong>局域网地址</strong>（LAN Address），<strong>MAC位址</strong>，<strong>以太网地址</strong>（Ethernet Address）或<strong>物理地址</strong>（Physical Address），它是一个用来确认网络设备位置的位址。在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/OSI%E6%A8%A1%E5%9E%8B">OSI模型</a>中，第三层网络层负责<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80">IP地址</a>，第二层数据链路层则负责MAC位址。MAC地址用于在网络中唯一标示一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E5%8D%A1">网卡</a>，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的MAC地址。</p>
+<p>MAC地址也叫物理地址、硬件地址，由网络设备制造商生产时烧录在网卡(Network lnterface Card)的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/EPROM/1690813">EPROM</a>(一种闪存芯片，通常可以通过程序擦写)。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80/150859">IP地址</a>与MAC地址在计算机里都是以<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457">二进制</a>表示的，IP地址是32位的，而MAC地址则是48位的。</p>
+<h3 id="MAC地址与IP地址"><a href="#MAC地址与IP地址" class="headerlink" title="MAC地址与IP地址"></a>MAC地址与IP地址</h3><p>IP 地址是基于逻辑的，比较灵活，不受硬件的限制，也容易记忆。而 MAC地址在一定程度上与硬件一致，是基于物理的，能够标识具体的网络节点。这两种地址各有优点，使用时也因条件不同而采取不同的地址。</p>
+<p>IP地址和MAC地址相同点是它们都唯一，不同的特点主要有：</p>
+<ol>
+<li>对于网络上的某一设备，如一台计算机或一台路由器，其IP地址是基于网络拓扑设计出的，同一台设备或计算机上，改动IP地址是很容易的（但必须唯一），而MAC则是生产厂商烧录好的，一般不能改动。我们可以根据需要给一台主机指定任意的IP地址，如我们可以给<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B1%80%E5%9F%9F%E7%BD%91">局域网</a>上的某台计算机分配IP地址为192.168.0.112   ，也可以将它改成192.168.0.200。而任一网络设备（如网卡，路由器）一旦生产出来以后，其MAC地址不可由本地连接内的配置进行修改。如果一个计算机的网卡坏了，在更换网卡之后，该计算机的MAC地址就变了   。</li>
+<li>长度不同。IP地址为32位，MAC地址为48位  。</li>
+<li>分配依据不同。IP地址的分配是基于网络拓扑，MAC地址的分配是基于制造商 [8]  。</li>
+<li>寻址协议层不同。IP地址应用于OSI第三层，即网络层，而MAC地址应用在OSI第二层，即数据链路层。   数据链路层协议可以使数据从一个节点传递到相同链路的另一个节点上（通过MAC地址），而网络层协议使数据可以从一个网络传递到另一个网络上（ARP根据目的IP地址，找到中间节点的MAC地址，通过中间节点传送，从而最终到达目的网络）</li>
+</ol>
+<h2 id="域名、DNS"><a href="#域名、DNS" class="headerlink" title="域名、DNS"></a>域名、DNS</h2><p><strong>域名</strong>（英语：<strong>Domain Name</strong>），简称<strong>域名</strong>、<strong>网域</strong>，是由一串用点分隔的名字组成的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Internet">Internet</a>上某一台<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA/140338">计算机</a>或计算机组的名称，用于在数据传输时标识计算机的电子方位（有时也指地理位置）。</p>
+<p>例如，<a href="http://www.wikipedia.org是一个域名，和[IP地址](https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80)208.80.152.2相对应。DNS就像是一个自动的电话号码簿，我们可以直接拨打wikipedia的名字来代替电话号码（IP地址）。我们直接调用网站的名字以后，DNS就会将便于人类使用的名字（如www.wikipedia.org）转化成便于机器识别的IP地址（如208.80.152.2）。">www.wikipedia.org是一个域名，和[IP地址](https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80)208.80.152.2相对应。DNS就像是一个自动的电话号码簿，我们可以直接拨打wikipedia的名字来代替电话号码（IP地址）。我们直接调用网站的名字以后，DNS就会将便于人类使用的名字（如www.wikipedia.org）转化成便于机器识别的IP地址（如208.80.152.2）。</a></p>
+<p>网域名称系统（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/DNS">DNS</a>，Domain Name System，将<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9F%9F%E5%90%8D">域名</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80">IP地址</a>相互<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%98%A0%E5%B0%84">映射</a>的一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93">分布式数据库</a>）是因特网的一项核心服务，它作为可以将域名和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80">IP地址</a>相互<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%98%A0%E5%B0%84/410062">映射</a>的一个分布式数据库，能够使人更方便地访问互联网，而不用去记住能够被机器直接读取的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80">IP地址</a>数串。</p>
+<h2 id="URL、域名、网站"><a href="#URL、域名、网站" class="headerlink" title="URL、域名、网站"></a>URL、域名、网站</h2><p><img src="https://s2.ax1x.com/2019/08/25/mgamHs.png" srcset="/img/loading.gif" lazyload><br>版权声明：上图为CSDN博主「攻城狮Kevin」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wx1528159409/article/details/83419507">https://blog.csdn.net/wx1528159409/article/details/83419507</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/web/">web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
