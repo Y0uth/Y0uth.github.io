@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>PicGo+github+typora 图床</title>
+    <link href="/2023/05/15/PicGo-github-%E5%9B%BE%E5%BA%8A/"/>
+    <url>/2023/05/15/PicGo-github-%E5%9B%BE%E5%BA%8A/</url>
+    
+    <content type="html"><![CDATA[<p>在日常使用typora过程中，插入图片会将图片保存在本地，图片地址不对（是本地地止），<strong>直接复制到网站上，会导致图片加截不出来</strong>。因此将博客上传到github时，要么需要将图片同md文件同时上传到github，要么需要将图像上传到其他的一些图床上，再将md文件中的图像链接替换成网络地址。之前一直想搞这个事情，但是平时的文章中图片不是很多，<del>就懒得弄（懒死bushi）</del>。</p><p>不过还是想解决掉这个问题，避免以后在上传blog之前还得将图片上传到图床上，因此想利用PicGo搭配typora将图片自动上传到第三方图床上，由于github免费，所以选择它作为第三方图床。</p><ul><li>Typora：文章编辑器</li><li>PicGo：自动上传typora中的图片</li><li>Github：作为第三方图床，存储图片</li><li>CDN：Github在国内访问并不稳定，加速访问</li></ul><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p><a href="https://typora.io/">Typora</a>：目前typora已经开始收费了，可以尝试使用历史版本</p><p><a href="https://molunerfinn.com/PicGo/">PicGo</a></p><h2 id="Github-配置"><a href="#Github-配置" class="headerlink" title="Github 配置"></a>Github 配置</h2><ol><li><p>在自己的github中新建一个仓库，用来存储上传的图片 eg：Yank3l&#x2F;ImageHosting</p></li><li><p>点击右上角头像-&gt;Setting-&gt;Developer settings-&gt;Personal access tokens-&gt;tokens(classic)-&gt;生成token</p><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105059306.png" alt="image-20230515105059306"></p></li></ol><h2 id="PicGo配置"><a href="#PicGo配置" class="headerlink" title="PicGo配置"></a>PicGo配置</h2><p>我是用的是2.4.0-beta.1版本</p><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105335763.png" alt="image-20230515105335763"></p><ul><li>图床配置名：以前的版本好像是没有这个选项的，这里我就随便起了个名字</li><li>设定仓库名：填写自己的github用户名&#x2F;仓库名 例如我的github用户名为yank3l，仓库名为ImageHosting</li><li>设定分支名：填写main，有的教程写的是master，会出现问题，这是因为github创建的仓库默认都是main分支，不是master分支</li><li>设定token：复制github生成的token数据</li><li>设定存储路径：是指在仓库名下会生成一个文件夹，在该文件夹中存储图像</li><li>设定自定义域名：<code>https://cdn.jsdelivr.net/gh/用户名/仓库名</code></li></ul><h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><p>在上传图片中可能会出现网络错误，这里设置代理，方便在上传图片时也使用主机的代理，我是用的是<code>clash</code>，其默认是端口号是7890，因此代理地址设置为<code>http://127.0.0.1；7890</code>（PicGo<strong>只支持简单HTTP代理</strong>），插件安装镜像按照官方文档设置为</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">https://registry.npm.taobao.org/<br></code></pre></td></tr></table></figure><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111306729.png" alt="image-20230515111306729"></p><h2 id="typora测试"><a href="#typora测试" class="headerlink" title="typora测试"></a>typora测试</h2><p>typora上传服务可以选择app或者命令行，这里选择的是app，完成后点击验证图片上传选项，会显示上传成功，仓库里会上传typora的图标。</p><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111504157.png" alt="image-20230515111504157"></p><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112256013.png" alt="image-20230515112256013"></p><p>配置过程中可能会出错，可以在PicGo的日志文件中查看错误原因和代码，一般来说错误代码为4xx的一般是配置填写错误。其他原因查看文档以及github的issue</p><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112322848.png" alt="image-20230515112322848"></p><p>参考链接</p><p><a href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here">PicGo指南</a></p><p><a href="https://github.com/Molunerfinn/PicGo/issues">PicGo-issue</a></p><p><a href="https://github.com/Molunerfinn/PicGo/blob/dev/FAQ.md">PicGo常见问题</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>tools</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>github</tag>
+      
+      <tag>tools</tag>
+      
+      <tag>PicGo</tag>
+      
+      <tag>typora</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>OAuth2.0</title>
     <link href="/2022/07/15/OAuth2-0/"/>
     <url>/2022/07/15/OAuth2-0/</url>
