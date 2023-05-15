@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="absol函数原型：void absol(x,y) flash x,y  or  big x,y 功能：取x的绝对值，y&#x3D;|x| add函数原型：void add(x,y,z) 参数类型：big x,y,z 功能：z&#x3D;x+y brand函数原型：int brand() 功能：返回值一个随机整数 限制：首次使用前必须先调用irand。 注意：此生成器的加密能力不强。对于加密应用程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mircal常用函数手册">
+<meta property="og:url" content="http://yankel.github.com/2020/12/19/mircal%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="absol函数原型：void absol(x,y) flash x,y  or  big x,y 功能：取x的绝对值，y&#x3D;|x| add函数原型：void add(x,y,z) 参数类型：big x,y,z 功能：z&#x3D;x+y brand函数原型：int brand() 功能：返回值一个随机整数 限制：首次使用前必须先调用irand。 注意：此生成器的加密能力不强。对于加密应用程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-19T06:57:26.000Z">
+<meta property="article:modified_time" content="2023-05-15T07:13:35.965Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="skills">
+<meta property="article:tag" content="miracl">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>mircal常用函数手册 - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="mircal常用函数手册">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-19 14:57" pubdate>
+        2020年12月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mircal常用函数手册</h1>
+            
+            <div class="markdown-body">
+              <h4 id="absol"><a href="#absol" class="headerlink" title="absol"></a>absol</h4><p>函数原型：void absol(x,y)</p>
+<p>flash x,y  or  big x,y</p>
+<p>功能：取x的绝对值，y&#x3D;|x|</p>
+<h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>函数原型：void add(x,y,z)</p>
+<p>参数类型：big x,y,z</p>
+<p>功能：z&#x3D;x+y</p>
+<h4 id="brand"><a href="#brand" class="headerlink" title="brand"></a>brand</h4><p>函数原型：int brand()</p>
+<p>功能：返回值一个随机整数</p>
+<p>限制：首次使用前必须先调用irand。</p>
+<p>注意：此生成器的加密能力不强。对于加密应用程序，请使用强例程。</p>
+<h4 id="bigbits"><a href="#bigbits" class="headerlink" title="bigbits"></a>bigbits</h4><p>函数原型：void bigbits(n,x)</p>
+<p>参数类型：int n, big x</p>
+<p>功能：产生一个n位的大整数，初始化随机种子由irand函数实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">irand(time(<span class="hljs-literal">NULL</span>));（头文件<span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span>）</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="big-to-bytes"><a href="#big-to-bytes" class="headerlink" title="big_to_bytes"></a>big_to_bytes</h4><p>函数原型：int <strong>big_to_bytes</strong>(max,x,ptr,justify)</p>
+<p>参数类型：int max;big x;char *ptr;BOOL justify</p>
+<p>功能：描述：将正数x转换为二进制八位字符串</p>
+<p>参数：大数字x和字节数组ptr，长度最大。进行错误检查，以确保函数在最大值&gt;0时不会超出ptr的限制。如果max&#x3D;0，则不执行检查。如果max&gt;0且justify&#x3D;TRUE，则输出将正确对齐，否则将抑制前导零。</p>
+<p>返回值：在ptr中生成的字节数。如果justify&#x3D;TRUE，则返回值为max。</p>
+<p>限制：如果“正当性”为TRUE，则最大值必须大于0</p>
+<h4 id="bytes-to-big"><a href="#bytes-to-big" class="headerlink" title="bytes_to_big"></a>bytes_to_big</h4><p>函数原型：void bytes_to_big(len,ptr,x)</p>
+<p>参数类型：int len;  char *ptr;  big x;</p>
+<p>功能：将二进制八位字节字符串转换为大数字。二进制到大的转换。</p>
+<p>参数：指向长度为len的字节数组ptr的指针，以及一个大的结果x。</p>
+<h4 id="—cinnum"><a href="#—cinnum" class="headerlink" title="—cinnum"></a>—cinnum</h4><p>函数原型：int cinnum(x,f)</p>
+<p>参数类型：flash x; FILE *f</p>
+<p>描述:从键盘或文件中输入一个flash数字，以实例变量IOBASE的当前值作为基数。可以使用斜杠“&#x2F;”来表示分子和分母，也可以使用基数点输入闪存数。</p>
+<p>参数：一个big&#x2F;flash数字x和一个文件描述符f。从键盘输入时，将f指定为stdin，否则指定为其他打开文件的描述符。要强制输入固定数量的字节，请在调用cinnum之前将实例变量INPLEN设置为所需的数量。</p>
+<p>返回值：输入字符数。</p>
+<h4 id="cinstr"><a href="#cinstr" class="headerlink" title="cinstr"></a>cinstr</h4><p>函数原型：int cinstr(x,s)</p>
+<p>参数类型：flash x; char *s</p>
+<p>功能说明: 将大数字符串转换成大数</p>
+<p>参数：一个大的&#x2F;flash数字x和一个字符串s。</p>
+<p>返回值：输入字符数</p>
+<p>eg:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">mip-&gt;IOBASE=<span class="hljs-number">16</span>; <span class="hljs-comment">// input large hex number into big x</span><br>cinstr(x,”AF12398065BFE4C96DB723A”);<br></code></pre></td></tr></table></figure>
+
+<h4 id="compare"><a href="#compare" class="headerlink" title="compare"></a>compare</h4><p>函数原型：int compare(x,y)</p>
+<p>参数类型：big x; big y</p>
+<p>函数功能：比较两个大数的大小</p>
+<p>返回值：x&gt;y时返回+1, x&#x3D;y时返回0, x&lt;y时返回-1  在这里需要注意的是，compare()函数比较的是两个big类型的数，此函数的返回值是int型的+1和-1   </p>
+<p>注意:if(1)和if(-1)的结果相同</p>
+<h4 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h4><p>函数原型：void convert (n,x)</p>
+<p>参数类型：int n; big x</p>
+<p>函数功能：将一个整数n转换成一个大数x</p>
+<h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h4><p>函数原型：void <strong>copy</strong>(big x, big y);</p>
+<p>参数类型：flash x,y     big x ,y</p>
+<p>函数功能：y&#x3D;x</p>
+<h4 id="cotnum"><a href="#cotnum" class="headerlink" title="cotnum"></a>cotnum</h4><p>函数原型：int cotnum(x,f)</p>
+<p>参数类型：flash x;FILE *f</p>
+<p>描述：将当前分配给实例变量IOBASE的值作为基数，输出一个大的或闪烁的数字到屏幕或文件中。如果实例变量RPOINT&#x3D;ON，则flash数字将转换为基数点表示。否则它将作为分数输出。</p>
+<p>参数一个大的&#x2F;闪存号x和一个文件描述符f。如果f是stdout，则输出到屏幕，否则输出到用描述符f打开的文件。</p>
+<p>返回值：输出字符数。</p>
+<p>eg：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">mip-&gt;IOBASE=<span class="hljs-number">16</span>;<br>cotnum(x,fp);<br><span class="hljs-comment">//This outputs x in hex, to the file associated with fp. </span><br></code></pre></td></tr></table></figure>
+
+<h4 id="cotstr"><a href="#cotstr" class="headerlink" title="cotstr"></a>cotstr</h4><p>函数原型：int cotstr(x,s)</p>
+<p>参数类型：flash x; char *s</p>
+<p>函数功能：将一个大数根据其进制转换成一个字符串</p>
+<p>返回值: 字符串长度</p>
+<h4 id="decr"><a href="#decr" class="headerlink" title="decr"></a>decr</h4><p>函数原型：void decr(x,n,z)</p>
+<p>参数类型：big x,z; int n</p>
+<p>功能说明: 将一个大数减去一个整数， z&#x3D;x-n.</p>
+<h4 id="divide"><a href="#divide" class="headerlink" title="divide"></a>divide</h4><p>函数原型：void divide(x,y,z)</p>
+<p>参数类型：big x,y,z</p>
+<p>功能：两个大数相除，z&#x3D;x&#x2F;y; x&#x3D;x mod y，当变量y和z相同时，x为余数，商不返回（即y的值不变）；当x和z相同时，x为商，余数不返回。</p>
+<p>注意：Example:  divide(x,y,y);&#x2F;&#x2F;x为余数，y值不</p>
+<h4 id="ecp-memalloc"><a href="#ecp-memalloc" class="headerlink" title="ecp_memalloc"></a>ecp_memalloc</h4><h4 id="ecp-memkill"><a href="#ecp-memkill" class="headerlink" title="ecp_memkill"></a>ecp_memkill</h4><h4 id="exsign"><a href="#exsign" class="headerlink" title="exsign"></a>exsign</h4><h4 id="getdig"><a href="#getdig" class="headerlink" title="getdig"></a>getdig</h4><p>函数原型：int getdig(x,i)</p>
+<p>参数类型：big x; int i</p>
+<p>描述：从一个大数字中提取一个数字。</p>
+<p>参数：一个大的数字x，和所需的数字i。</p>
+<p>返回值：请求的数字的值。</p>
+<p>限制：如果所需数字不存在，则返回垃圾。</p>
+<h4 id="igcd"><a href="#igcd" class="headerlink" title="igcd"></a>igcd</h4><p>函数原型：int igcd(x,y)</p>
+<p>参数类型：int x,y</p>
+<p>功能：使用欧几里德方法计算两个整数的最大公约数</p>
+<p>返回值：x和y的GCD</p>
+<h4 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h4><p>函数原型：void incr(x,n,z)</p>
+<p>参数类型：big x,z  ;    int n</p>
+<p>功能：z&#x3D;x+n</p>
+<p>eg:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">incr（x，<span class="hljs-number">2</span>，x）；<span class="hljs-comment">/*这将使x增加2。*/</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="innum"><a href="#innum" class="headerlink" title="innum"></a>innum</h4><p>函数原型：int innum(x,f)</p>
+<p>参数类型：flash x; FILE *f</p>
+<h4 id="insign"><a href="#insign" class="headerlink" title="insign"></a>insign</h4><p>函数原型：void insign(s,x)</p>
+<p>参数类型：int s; flash x</p>
+<p>功能:</p>
+<h4 id="instr"><a href="#instr" class="headerlink" title="instr"></a>instr</h4><p>函数原型：int instr(x,s)</p>
+<p>参数类型：flash x; char *s</p>
+<p>功能：</p>
+<h4 id="irand"><a href="#irand" class="headerlink" title="irand"></a>irand</h4><p>函数原型：void irand(seed)</p>
+<p>参数类型：long seed</p>
+<p>功能：初始化内部随机数系统</p>
+<h4 id="lgconv"><a href="#lgconv" class="headerlink" title="lgconv"></a>lgconv</h4><p>函数原型：void lgconv(ln,x)</p>
+<p>参数类型：long ln; big x</p>
+<p>功能：将长整数转换为大数格式</p>
+<h4 id="mad"><a href="#mad" class="headerlink" title="mad"></a>mad</h4><p>函数原型：void mad(x,y,z,w,q,r)</p>
+<p>参数类型：big x,y,z,w,q,r</p>
+<p>功能：<em>q&#x3D;(x.y+z)&#x2F;w</em>，r为余数，如果w和q不是不同的变量，则只返回余数；如果q和r不是不同的，则只返回商。如果x和z（或y和z）相同，则不会进行z的加法。</p>
+<h4 id="memalloc"><a href="#memalloc" class="headerlink" title="memalloc"></a>memalloc</h4><p>函数原型：void  *memalloc(n)</p>
+<p>参数类型：int n</p>
+<p>功能：：在一个堆访问中为n个大变量保留空间。随后，可以通过调用mirvar_mem从该内存初始化单个大&#x2F;闪存变量</p>
+<p>返回值：指向已分配内存的指针</p>
+<h4 id="memkill"><a href="#memkill" class="headerlink" title="memkill"></a>memkill</h4><p>函数原型：void memkill(mem,n)</p>
+<p>参数类型：char *mem; int n</p>
+<p>功能：删除memalloc先前分配的内存并将其设置为</p>
+<h4 id="mirexit"><a href="#mirexit" class="headerlink" title="mirexit"></a>mirexit</h4><p>函数原型：void mirexit()</p>
+<p>功能：在MIRACL的当前实例之后清理，并释放所有内部变量。随后调用mirsys将重新初始化MIRACL系统（清除MIRACL系统，释放所有内部变量）</p>
+<h4 id="mirkill"><a href="#mirkill" class="headerlink" title="mirkill"></a>mirkill</h4><p>函数原型：void mirkill(x)</p>
+<p>参数类型：big x</p>
+<p>功能： 释放内存大数所占的内存    清除MIRACL系统，释放所有内部变量。</p>
+<h4 id="mirsys"><a href="#mirsys" class="headerlink" title="mirsys"></a>mirsys</h4><p>函数原型：miracl *mirsys（nd,nb）</p>
+<p>参数类型：int nd,nb</p>
+<p>功能：初始化MIRACL系统，该函数必须在调用MIRACL库函数之前先执行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"> miracl *mip=mirsys(<span class="hljs-number">500</span>,<span class="hljs-number">10</span>);<span class="hljs-comment">//初始化500位的10进行制数</span><br><span class="hljs-comment">//意思是我定义的这些变量最大长度都是500位（这个位是后面进制的位数），输入、输出、运算用的进制都是10进制。</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="mirvar"><a href="#mirvar" class="headerlink" title="mirvar"></a>mirvar</h4><p>函数原型：flash mirvar(iv)</p>
+<p>参数类型：int iv</p>
+<p>功能：通过为big&#x2F;flash变量保留适当数量的内存位置来初始化该变量。这个内存可以通过随后调用mirkill函数来释放</p>
+<p>eg</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">flash x;<br>x=mirvar(<span class="hljs-number">8</span>);<br><span class="hljs-comment">//Creates a flash variable x=8.</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="mirvar-mem"><a href="#mirvar-mem" class="headerlink" title="mirvar_mem"></a>mirvar_mem</h4><p>函数原型：flash mirvar_mem(mem,index)</p>
+<p>参数类型：char *mem； int index</p>
+<p>功能：从预先分配的字节数组mem初始化big&#x2F;flash变量的内存</p>
+<p>返回值：初始化的big&#x2F;flash变量</p>
+<p>限制：mem必须已经分配并指向足够的内存</p>
+<h4 id="multiply"><a href="#multiply" class="headerlink" title="multiply"></a>multiply</h4><p>函数原型：void multiply(x,y,z)</p>
+<p>参数类型：big x,y,z</p>
+<p>功能：z&#x3D;x*y</p>
+<h4 id="negify"><a href="#negify" class="headerlink" title="negify"></a>negify</h4><p>函数原型：void negify(x,y)</p>
+<p>参数类型：flash x,y</p>
+<p>功能：大数取反，y&#x3D;-x</p>
+<h4 id="normalise"><a href="#normalise" class="headerlink" title="normalise"></a>normalise</h4><p>函数原型：int normalise(x,y)</p>
+<p>参数类型：big x,y</p>
+<p>功能：y&#x3D;nx</p>
+<p>返回值：n</p>
+<h4 id="nroot"><a href="#nroot" class="headerlink" title="nroot"></a>nroot</h4><p>函数原型：BOOL <strong>nroot</strong>(x,n,z)</p>
+<p>参数类型：big x,z; int n;</p>
+<p>功能：$z&#x3D;\lfloor x^{1&#x2F;n} \rfloor$ </p>
+<p>返回值；如果找到的根是精确的，则返回布尔值TRUE，否则返回FALSE。</p>
+<h4 id="numdig"><a href="#numdig" class="headerlink" title="numdig"></a>numdig</h4><p>函数原型：int numdig(x)</p>
+<p>参数类型：big x</p>
+<p>功能：返回大数x中数字的个数（位数）</p>
+<h4 id="otnum"><a href="#otnum" class="headerlink" title="otnum"></a>otnum</h4><p>函数原型：int otnum(x,f)</p>
+<p>参数类型：flash x; FILE *f</p>
+<p>功能：使用mirsys初始调用中指定的值作为基数，向屏幕或文件输出一个big或flash数字   如果实例变量RPOINT&#x3D;ON，则flash数字将转换为基数点表示。否则它将作为分数输出</p>
+<p>返回值：输出字符数。</p>
+<p>限制：mirsys中指定的基数必须小于或等于256。如果没有，请改用cotnum</p>
+<h4 id="otstr"><a href="#otstr" class="headerlink" title="otstr"></a>otstr</h4><p>函数原型：int otstr(x,s)</p>
+<p>参数类型：flash x; char *s</p>
+<p>功能：将在对mirsys的初始调用中指定的值作为基数，向指定的字符串输出一个大big或flash数字   如果实例变量RPOINT&#x3D;ON，则flash数字将转换为基数点表示。否则它将作为分数输出</p>
+<h4 id="premult"><a href="#premult" class="headerlink" title="premult"></a>premult</h4><p>函数原型：void premult(x,n,z)</p>
+<p>参数类型：int n; big x,z</p>
+<p>功能：z&#x3D;nx</p>
+<h4 id="putdig"><a href="#putdig" class="headerlink" title="putdig"></a>putdig</h4><p>函数原型：void putdig(n,x,i)</p>
+<p>参数类型：big x ; int i,n</p>
+<p>功能：将一个大数的数字设置为给定值  ，n为新值</p>
+<h4 id="remian"><a href="#remian" class="headerlink" title="remian"></a>remian</h4><p>函数原型：int remian(x,n)</p>
+<p>参数类型：big x;int n</p>
+<p>功能：当一个大数除以一个整数时，查找整数余数</p>
+<p>返回值：余数</p>
+<h4 id="set-io-buffer-size"><a href="#set-io-buffer-size" class="headerlink" title="set_io_buffer_size"></a>set_io_buffer_size</h4><p>函数原型：void set_io_buffer_size(len)</p>
+<p>参数类型：int len</p>
+<p>功能：设置输入&#x2F;输出缓冲区的大小。默认设置为1024，但需要处理非常大的数字的程序可能需要更大的I&#x2F;O缓冲区</p>
+<h4 id="—void-set-user-function"><a href="#—void-set-user-function" class="headerlink" title="—void set_user_function"></a>—void set_user_function</h4><p>函数原型：void set_user_function(func)</p>
+<p>参数类型：BOOL (*user)(void)</p>
+<p>功能：提供一个用户指定的函数，该函数在一些比较耗时的MIRACL函数中定期调用，特别是那些涉及模幂运算和寻找大素数的函数</p>
+<h4 id="size"><a href="#size" class="headerlink" title="size"></a>size</h4><p>函数原型：int size(x)</p>
+<p>参数类型：big x</p>
+<p>功能：尝试将大数转换为简单整数。也可用于测试big&#x2F;flash变量的符号</p>
+<h4 id="subdivisible"><a href="#subdivisible" class="headerlink" title="subdivisible"></a>subdivisible</h4><p>函数原型：BOOL subdivisible(x,n)</p>
+<p>参数类型：big x;   int n;</p>
+<p>功能： 测试n能否整除x</p>
+<p>返回值: x除以n余数为0，返回TRUE，否则返回FALSE</p>
+<h4 id="subtract"><a href="#subtract" class="headerlink" title="subtract"></a>subtract</h4><p>函数原型：void subtract(x,y,z)</p>
+<p>参数类型：big x,y,z</p>
+<p>功能：z&#x3D;x-y</p>
+<h4 id="zero"><a href="#zero" class="headerlink" title="zero"></a>zero</h4><p>函数类型：void zero(x)</p>
+<p>参数类型：flash x</p>
+<p>功能：将x置零</p>
+<h4 id="bigdig"><a href="#bigdig" class="headerlink" title="bigdig"></a>bigdig</h4><p>函数原型：void bigdig(n,b,x)</p>
+<p>参数类型：int n,b  ;  big x</p>
+<p>功能：产生一个指定长度的进制的随机数，该函数使用内置的随机数发生器，初始化种子调用irand函数</p>
+<p>x是生成的大数  n位长   b是进制</p>
+<p>eg</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">bigdig（<span class="hljs-number">100</span>,<span class="hljs-number">10</span>,x）；<br><span class="hljs-regexp">//</span>这将生成一个<span class="hljs-number">100</span>位十进制随机数<br></code></pre></td></tr></table></figure>
+
+<h4 id="bigrand"><a href="#bigrand" class="headerlink" title="bigrand"></a>bigrand</h4><p>函数原型：void bigrand(w,x)</p>
+<p>参数类型：big w,x;</p>
+<p>功能：生成一个大的随机数。使用由irand初始化的内置简单随机数生成器，0&lt;&#x3D;x&lt;w</p>
+<p>两个函数的区别：</p>
+<p>两个函数都是可以生成随机数的，但是它们的功能确实略有差异的。bigrand()是产生一个小于w的大数随机数，x&lt;w，如果w是一个十位的十进制数，那么x可能是一个十位的十进制数，只有九位的十进制数，也可能使只有一位的十进制数；bigdig()是产生一个指定长度的进制的随机数，比如说指定了产生一个十位的十进制数，那么这个函数就会严格的产生一个十位的十进制数。</p>
+<h4 id="egcd"><a href="#egcd" class="headerlink" title="egcd"></a>egcd</h4><p>函数原型：int egcd(x,y,z)</p>
+<p>参数类型：big x,y,z;</p>
+<p>功能：计算两个大数的最大公约数， <em>z&#x3D;gcd(x,y)</em></p>
+<h4 id="expb2"><a href="#expb2" class="headerlink" title="expb2"></a>expb2</h4><p>函数原型：void expb2(n,x)</p>
+<p>参数类型：  int n; big x;</p>
+<p>功能：计算2的n次方的大数  <em>x&#x3D;2^n.</em></p>
+<p>eg</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">expb2(<span class="hljs-number">1398269</span>,x);   <span class="hljs-comment">//2^1398269</span><br>            decr(x,<span class="hljs-number">1</span>,x);        <span class="hljs-comment">//x = x - 1</span><br>            mip-&gt;IOBASE=<span class="hljs-number">10</span>;     <span class="hljs-comment">//使用10进制</span><br>            cotnum(x,<span class="hljs-built_in">stdout</span>);   <span class="hljs-comment">//输出到屏幕</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="expint"><a href="#expint" class="headerlink" title="expint"></a>expint</h4><p>函数原型：void expint（b, n, x）</p>
+<p>参数类型：int b,n;  big x;</p>
+<p>功能：计算b的n次方的大数  <em>x&#x3D;b^n.</em></p>
+<h4 id="fft-mult"><a href="#fft-mult" class="headerlink" title="fft_mult"></a>fft_mult</h4><p>函数原型：void <strong>fft_mult</strong>(x,y,z)</p>
+<p>参数类型：big x,y,z;</p>
+<p>功能：使用Fast Fourier算法计算两个大数乘积，z&#x3D;x*y</p>
+<h4 id="gprime"><a href="#gprime" class="headerlink" title="gprime"></a>gprime</h4><p>函数原型：void gprime(n)</p>
+<p>参数类型：int n</p>
+<p>功能：将达到某个限制的所有素数生成实例数组素数，并以零结尾</p>
+<h4 id="hamming"><a href="#hamming" class="headerlink" title="hamming"></a>hamming</h4><p>函数原型：int hamming(n)</p>
+<p>参数类型：big n</p>
+<p>功能：计算一个大数的汉明权重–汉明距离（实际上是二进制表示中的1的数目）</p>
+<h4 id="invers"><a href="#invers" class="headerlink" title="invers"></a>invers</h4><p>函数原型：unsigned int invers(x,y)</p>
+<p>参数原型：unsigned int x,y;</p>
+<p>功能：计算两个无符号整数（要求互素）的模逆，返回<em>x-1 mod y</em></p>
+<h4 id="isprime"><a href="#isprime" class="headerlink" title="isprime"></a>isprime</h4><p>函数原型：BOOL isprime(x)</p>
+<p>参数类型：big x;</p>
+<p>功能：判断一个大数是否为素数，使用概率测试算法</p>
+<p>返回值：x为素数返回TRUE，否则返回FALSE</p>
+<h4 id="jac"><a href="#jac" class="headerlink" title="jac"></a>jac</h4><p>函数原型：int jac(x,n)</p>
+<p>参数类型：unsigned int x,n;</p>
+<p>功能：计算雅可比符号的值</p>
+<h4 id="jack"><a href="#jack" class="headerlink" title="jack"></a>jack</h4><p>函数原型：int jack(x,n)</p>
+<p>参数类型：big x,n</p>
+<p>功能：计算雅可比符号的值</p>
+<h4 id="logb2"><a href="#logb2" class="headerlink" title="logb2"></a>logb2</h4><p>函数原型：int logb2(x)</p>
+<p>参数类型：big x;</p>
+<p>功能： 计算一个大数（实际上是其中的位数）的基数2的近似整数log </p>
+<h4 id="lucas"><a href="#lucas" class="headerlink" title="lucas"></a>lucas</h4><p>函数原型：void lucas(x,e,n,vp,v)</p>
+<p>参数类型：big x,e,n,vp,v</p>
+<p>功能：执行Lucas模幂运算。在内部使用蒙哥马利算法。通过调用特殊的汇编语言例程来实现Montgomery算法，可以为特定的模块进一步加速该函数。见powmod</p>
+<h4 id="power"><a href="#power" class="headerlink" title="power"></a>power</h4><p>函数原型： void power(x,n,z,w)</p>
+<p>参数类型： long n; big x,z,w;</p>
+<p>功能：w&#x3D;xn.如果w≠z则w&#x3D;xn mod z</p>
+<h4 id="powmod"><a href="#powmod" class="headerlink" title="powmod"></a>powmod</h4><p>函数原型：void powmod(x,y,z,w)</p>
+<p>参数类型：big x,y,z,w;</p>
+<p>功能：模幂运算，<em>w&#x3D;x^y mod z</em></p>
+<h4 id="sfbit"><a href="#sfbit" class="headerlink" title="sfbit"></a>sfbit</h4><p>函数原型：void sftbit(x,n,z)</p>
+<p>参数类型：big x,z;int n;</p>
+<p>功能：将一个大数左移或右移n位，n为正数时左移，负数时右移</p>
+<h4 id="xgcd"><a href="#xgcd" class="headerlink" title="xgcd"></a>xgcd</h4><p>函数原型：int xgcd(x,y,xd,yd,z)</p>
+<p>参数类型： big x,y,xd,yd,z;</p>
+<p>功能： 计算两个大数的扩展最大公约数，也可以用来计算模逆，这个函数比<strong>mad</strong> 函数运算速度稍慢。<em>z&#x3D;gcd(x,y)&#x3D;x.xd+y.yd</em></p>
+<p>eg</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">xgcd(x,p,x,x,x);  <span class="hljs-comment">//计算x^-1 mod p</span><br><span class="hljs-comment">/* x = 1/x mod p  (p is prime) *</span><br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/1738a6878762caaedd33d4b4.html?sxts=1602327937928&amp;word=miracl%E5%BA%93%E6%89%8B%E5%86%8C">https://wenku.baidu.com/view/1738a6878762caaedd33d4b4.html?sxts=1602327937928&amp;word=miracl%E5%BA%93%E6%89%8B%E5%86%8C</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">xgcd(Mi1, m1, Mj1, Mj1, Mj1);<span class="hljs-comment">//Mj1为Mi1的逆</span><br>xgcd(Mi2, m2, Mj2, Mj2, Mj2);<span class="hljs-comment">//Mj2为Mi2的逆</span><br>xgcd(Mi3, m3, Mj3, Mj3, Mj3);<span class="hljs-comment">//Mj3为Mi3的逆</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//扩展的欧几里得算法</span><br><span class="hljs-comment">//Input</span><br>x = <span class="hljs-number">13</span><br>y = <span class="hljs-number">17</span><br>xgcd(x, y, xd, yd, z)<br><span class="hljs-comment">//Output</span><br>xd = <span class="hljs-number">4</span><br>yd = <span class="hljs-number">3</span><br>z = <span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="实例变量IOBASE"><a href="#实例变量IOBASE" class="headerlink" title="实例变量IOBASE"></a>实例变量IOBASE</h4><p> IOBASE是用于控制输入和输出的进制问题的，可以在程序中随意更改， 必须大于或等于2且小于或等于256。使用实例是像这样的：mip-&gt;IOBASE&#x3D;16，这样子输入的变量和输出的变量所使用的进制都是十六进制</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                    
+                      <a class="hover-with-bg" href="/categories/handbook/">handbook</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                    
+                      <a class="hover-with-bg" href="/tags/skills/">skills</a>
+                    
+                      <a class="hover-with-bg" href="/tags/miracl/">miracl</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/08/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/02/23/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/">
+                        <span class="hidden-mobile">个人博客的搭建（hexo+github）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
