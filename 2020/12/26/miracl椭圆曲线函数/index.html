@@ -15,33 +15,25 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="对miracl库中关于椭圆曲线的函数进行总结。">
   <meta name="author" content="Yankel">
   <meta name="keywords" content="">
-  <meta name="description" content="在日常使用typora过程中，插入图片会将图片保存在本地，图片地址不对（是本地地止），直接复制到网站上，会导致图片加截不出来。因此将博客上传到github时，要么需要将图片同md文件同时上传到github，要么需要将图像上传到其他的一些图床上，再将md文件中的图像链接替换成网络地址。之前一直想搞这个事情，但是平时的文章中图片不是很多，就懒得弄（懒死bushi）。 不过还是想解决掉这个问题，避免以后">
+  <meta name="description" content="对miracl库中关于椭圆曲线的函数进行总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PicGo+github+typora 图床">
-<meta property="og:url" content="http://yankel.github.com/2023/05/15/PicGo-github-%E5%9B%BE%E5%BA%8A/index.html">
+<meta property="og:title" content="miracl椭圆曲线函数">
+<meta property="og:url" content="http://yankel.github.com/2020/12/26/miracl%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Yankel">
-<meta property="og:description" content="在日常使用typora过程中，插入图片会将图片保存在本地，图片地址不对（是本地地止），直接复制到网站上，会导致图片加截不出来。因此将博客上传到github时，要么需要将图片同md文件同时上传到github，要么需要将图像上传到其他的一些图床上，再将md文件中的图像链接替换成网络地址。之前一直想搞这个事情，但是平时的文章中图片不是很多，就懒得弄（懒死bushi）。 不过还是想解决掉这个问题，避免以后">
+<meta property="og:description" content="对miracl库中关于椭圆曲线的函数进行总结。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105059306.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105335763.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111306729.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111504157.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112256013.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112322848.png">
-<meta property="article:published_time" content="2023-05-15T02:24:14.000Z">
-<meta property="article:modified_time" content="2023-05-15T03:26:18.875Z">
+<meta property="article:published_time" content="2020-12-26T07:47:42.000Z">
+<meta property="article:modified_time" content="2023-05-15T07:28:38.406Z">
 <meta property="article:author" content="Yankel">
-<meta property="article:tag" content="tools">
-<meta property="article:tag" content="github">
-<meta property="article:tag" content="PicGo">
-<meta property="article:tag" content="typora">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="skills">
+<meta property="article:tag" content="miracl">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105059306.png">
   
-  <title>PicGo+github+typora 图床 - Yankel</title>
+  <title>miracl椭圆曲线函数 - Yankel</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -187,7 +179,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="PicGo+github+typora 图床">
+            <span class="h2" id="subtitle" title="miracl椭圆曲线函数">
               
             </span>
 
@@ -197,8 +189,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-05-15 10:24" pubdate>
-        2023年5月15日 上午
+      <time datetime="2020-12-26 15:47" pubdate>
+        2020年12月26日 下午
       </time>
     </span>
   
@@ -208,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      3.2k 字
     </span>
   
 
@@ -217,7 +209,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      10 分钟
     </span>
   
 
@@ -246,49 +238,99 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PicGo+github+typora 图床</h1>
+            <h1 style="display: none">miracl椭圆曲线函数</h1>
             
             <div class="markdown-body">
-              <p>在日常使用typora过程中，插入图片会将图片保存在本地，图片地址不对（是本地地止），<strong>直接复制到网站上，会导致图片加截不出来</strong>。因此将博客上传到github时，要么需要将图片同md文件同时上传到github，要么需要将图像上传到其他的一些图床上，再将md文件中的图像链接替换成网络地址。之前一直想搞这个事情，但是平时的文章中图片不是很多，<del>就懒得弄（懒死bushi）</del>。</p>
-<p>不过还是想解决掉这个问题，避免以后在上传blog之前还得将图片上传到图床上，因此想利用PicGo搭配typora将图片自动上传到第三方图床上，由于github免费，所以选择它作为第三方图床。</p>
-<ul>
-<li>Typora：文章编辑器</li>
-<li>PicGo：自动上传typora中的图片</li>
-<li>Github：作为第三方图床，存储图片</li>
-<li>CDN：Github在国内访问并不稳定，加速访问</li>
-</ul>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p><a target="_blank" rel="noopener" href="https://typora.io/">Typora</a>：目前typora已经开始收费了，可以尝试使用历史版本</p>
-<p><a target="_blank" rel="noopener" href="https://molunerfinn.com/PicGo/">PicGo</a></p>
-<h2 id="Github-配置"><a href="#Github-配置" class="headerlink" title="Github 配置"></a>Github 配置</h2><ol>
-<li><p>在自己的github中新建一个仓库，用来存储上传的图片 eg：Yank3l&#x2F;ImageHosting</p>
-</li>
-<li><p>点击右上角头像-&gt;Setting-&gt;Developer settings-&gt;Personal access tokens-&gt;tokens(classic)-&gt;生成token</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105059306.png" srcset="/img/loading.gif" lazyload alt="image-20230515105059306"></p>
-</li>
-</ol>
-<h2 id="PicGo配置"><a href="#PicGo配置" class="headerlink" title="PicGo配置"></a>PicGo配置</h2><p>我是用的是2.4.0-beta.1版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515105335763.png" srcset="/img/loading.gif" lazyload alt="image-20230515105335763"></p>
-<ul>
-<li>图床配置名：以前的版本好像是没有这个选项的，这里我就随便起了个名字</li>
-<li>设定仓库名：填写自己的github用户名&#x2F;仓库名 例如我的github用户名为yank3l，仓库名为ImageHosting</li>
-<li>设定分支名：填写main，有的教程写的是master，会出现问题，这是因为github创建的仓库默认都是main分支，不是master分支</li>
-<li>设定token：复制github生成的token数据</li>
-<li>设定存储路径：是指在仓库名下会生成一个文件夹，在该文件夹中存储图像</li>
-<li>设定自定义域名：<code>https://cdn.jsdelivr.net/gh/用户名/仓库名</code></li>
-</ul>
-<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><p>在上传图片中可能会出现网络错误，这里设置代理，方便在上传图片时也使用主机的代理，我是用的是<code>clash</code>，其默认是端口号是7890，因此代理地址设置为<code>http://127.0.0.1；7890</code>（PicGo<strong>只支持简单HTTP代理</strong>），插件安装镜像按照官方文档设置为</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">https://registry.npm.taobao.org/<br></code></pre></td></tr></table></figure>
+              <p>对miracl库中关于椭圆曲线的函数进行总结。</p>
+<span id="more"></span>
 
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111306729.png" srcset="/img/loading.gif" lazyload alt="image-20230515111306729"></p>
-<h2 id="typora测试"><a href="#typora测试" class="headerlink" title="typora测试"></a>typora测试</h2><p>typora上传服务可以选择app或者命令行，这里选择的是app，完成后点击验证图片上传选项，会显示上传成功，仓库里会上传typora的图标。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515111504157.png" srcset="/img/loading.gif" lazyload alt="image-20230515111504157"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112256013.png" srcset="/img/loading.gif" lazyload alt="image-20230515112256013"></p>
-<p>配置过程中可能会出错，可以在PicGo的日志文件中查看错误原因和代码，一般来说错误代码为4xx的一般是配置填写错误。其他原因查看文档以及github的issue</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515112322848.png" srcset="/img/loading.gif" lazyload alt="image-20230515112322848"></p>
-<p>参考链接</p>
-<p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/#picgo-is-here">PicGo指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/issues">PicGo-issue</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/blob/dev/FAQ.md">PicGo常见问题</a></p>
+<h2 id="miracl椭圆曲线函数"><a href="#miracl椭圆曲线函数" class="headerlink" title="miracl椭圆曲线函数"></a>miracl椭圆曲线函数</h2><h4 id="ebrick-init"><a href="#ebrick-init" class="headerlink" title="ebrick_init"></a>ebrick_init</h4><p>函数原型：BOOL ebric_init(binst,x,y,a,b,n,w,nb)</p>
+<p>参数类型：ebrick *binst;   big x,y; big a,b,n;  int w,nb;</p>
+<p>参数意义：指向当前实例binst的指针，线上的不动点G&#x3D;（x，y），y2&#x3D;x3+ax+b，模n，以及指数nb中要使用的最大位数</p>
+<p>函数作用：曲初始化一个计算前GF(p)椭圆曲线乘法的梳状方法的实例，内部内存被分配给2^w个椭圆曲线点，这些点将被用于计算和存储</p>
+<p>返回值：如果一切顺利，则返回TRUE；如果出现问题，返回FALSE。</p>
+<h4 id="ebrick2-init"><a href="#ebrick2-init" class="headerlink" title="ebrick2_init"></a>ebrick2_init</h4><p>函数原型：BOOL ebrick2_init(binst,x,y,A,B,m,a,b,c,nb)</p>
+<p>参数类型：ebrick2 *binst;  big x,y;   big A,B;    int m,a,b,c,nb; </p>
+<p>参数意义：指向当前实例binst的指针、曲线y2 + xy &#x3D; x3 + Ax2 +  B上的固定点G&#x3D;(x，y)、字段参数m、a、B、c以及指数nb中要使用的最大位数。对于三项式基础，设置b &#x3D; 0。</p>
+<p>函数作用：初始化带预计算的GF（2m）椭圆曲线乘法的梳状法实例</p>
+<p>返回值：如果一切顺利，则返回TRUE；如果出现问题，返回FALSE</p>
+<h4 id="ecurve-add"><a href="#ecurve-add" class="headerlink" title="ecurve_add"></a>ecurve_add</h4><p>函数原型： void ecurve_add(p,pa) </p>
+<p>参数类型： epoint  *p,*pa; </p>
+<p>函数作用：(素域上)点的加法运算，pa&#x3D;pa+p</p>
+<h4 id="ecurve2-add"><a href="#ecurve2-add" class="headerlink" title="ecurve2_add"></a>ecurve2_add</h4><p>函数原型：void ecurve2_add(p,pa) </p>
+<p>参数类型：epoint *p,*pa;</p>
+<p>函数作用：在GF(2^m)椭圆曲线上. pa&#x3D;pa+p</p>
+<h4 id="ecurve-init"><a href="#ecurve-init" class="headerlink" title="ecurve_init"></a>ecurve_init</h4><p>函数原型：void ecurve_init(A,B,p,type) </p>
+<p>参数类型：big A,B,p;   int type; </p>
+<p>函数作用：初始化当前活动GF(p)椭圆曲线的内部参数，y2 &#x3D;x3 + Ax + B mod p，type为MR_PROJECTIVE or  MR_AFFINE,</p>
+<h4 id="ecurve2-init"><a href="#ecurve2-init" class="headerlink" title="ecurve2_init"></a>ecurve2_init</h4><h4 id="ecurve-mult"><a href="#ecurve-mult" class="headerlink" title="ecurve_mult"></a>ecurve_mult</h4><p>函数原型：void ecurve_mult(k,p,pa)</p>
+<p>参数类型： big k;   epoint  *p,*pa; </p>
+<p>函数作用：将GP(p)椭圆曲线上的点乘以一个整数, pa&#x3D;k*p.  </p>
+<h4 id="ecurve2-mult"><a href="#ecurve2-mult" class="headerlink" title="ecurve2_mult"></a>ecurve2_mult</h4><h4 id="ecurve-mult2"><a href="#ecurve-mult2" class="headerlink" title="ecurve_mult2"></a>ecurve_mult2</h4><p>函数原型：void ecurve_mult2(k1,p1,k2,p2,pa) </p>
+<p>参数类型：big k1,k2;  epoint *p1,*p2,*pa; </p>
+<p>函数作用：点乘加快速运算。计算GF(p)椭圆曲线上的点k1*p1+k2*p2。这比进行两次单独的乘法和加法要快。 pa &#x3D; k1*p1+k2*p2 </p>
+<h4 id="ecurve2-mult2"><a href="#ecurve2-mult2" class="headerlink" title="ecurve2_mult2"></a>ecurve2_mult2</h4><h4 id="ecurve-multi-add"><a href="#ecurve-multi-add" class="headerlink" title="ecurve_multi_add"></a>ecurve_multi_add</h4><p>函数原型：void ecurve_multi_add(m,x,w) </p>
+<p>参数类型：int m; epoint **x,**w; </p>
+<p>函数作用： w[i]&#x3D;w[i]+x[i] , i &#x3D;0 - m-1 （使用仿射坐标）</p>
+<h4 id="ecurve2-multi-add"><a href="#ecurve2-multi-add" class="headerlink" title="ecurve2_multi_add"></a>ecurve2_multi_add</h4><h4 id="ecurve-multn"><a href="#ecurve-multn" class="headerlink" title="ecurve_multn"></a>ecurve_multn</h4><p>函数原型：void ecurve_multn(n,k,p,pa) </p>
+<p>参数类型： int n;  big *k; epoint **p</p>
+<p>参数意义：整数n，n个大数字k[]的数组，n个点的数组。结果在pa中返回。</p>
+<p>函数作用：在GF(p)上计算 k[0]*p[0] + k[1]*p[1] + … + k[n-1]*p[n-1] , n&gt;2</p>
+<h4 id="ecurve2-multn"><a href="#ecurve2-multn" class="headerlink" title="ecurve2_multn"></a>ecurve2_multn</h4><h4 id="ecurve-sub"><a href="#ecurve-sub" class="headerlink" title="ecurve_sub"></a>ecurve_sub</h4><p>函数原型：void ecurve_sub(p,pa) </p>
+<p>参数类型：epoint *p,*pa; </p>
+<p>参数意义：GF（p）上两点</p>
+<p>函数作用：pa &#x3D; pa-p. </p>
+<h4 id="ecurve2-sub"><a href="#ecurve2-sub" class="headerlink" title="ecurve2_sub"></a>ecurve2_sub</h4><h4 id="epoint-comp"><a href="#epoint-comp" class="headerlink" title="epoint_comp"></a>epoint_comp</h4><p>函数原型：BOOL epoint_comp(p1,p2)</p>
+<p>参数类型：epoint\ *p1,*p2; </p>
+<p>函数作用：比较当前在GF(p)椭圆曲线上的两点</p>
+<p>返回值：如果点数相同，则返回TRUE，否则返回ALSE。</p>
+<h4 id="epoint2-comp"><a href="#epoint2-comp" class="headerlink" title="epoint2_comp"></a>epoint2_comp</h4><h4 id="epoint-copy"><a href="#epoint-copy" class="headerlink" title="epoint_copy *"></a>epoint_copy *</h4><p>函数原型：void epoint_copy(p1,p2) </p>
+<p>参数类型：epoint *p1,*p2; </p>
+<p>函数作用：将GF(p)椭圆曲线上的一个点复制到另一个点,p2&#x3D;p1</p>
+<h4 id="epoint2-copy"><a href="#epoint2-copy" class="headerlink" title="epoint2_copy *"></a>epoint2_copy *</h4><h4 id="epoint-free"><a href="#epoint-free" class="headerlink" title="epoint_free *"></a>epoint_free *</h4><p>函数原型：void epoint_free(p) </p>
+<p>参数类型：epoint *p; </p>
+<p>函数作用：释放与GF(p)椭圆曲线上的点p相关联的内存</p>
+<h4 id="epoint-get"><a href="#epoint-get" class="headerlink" title="epoint_get"></a>epoint_get</h4><p>???</p>
+<p>函数原型：int epoint_get(p,x,y) </p>
+<p>参数类型：epoint *p; big x,y; </p>
+<p>函数作用：取出p点的x,y坐标</p>
+<p>返回值：y的最低有效位</p>
+<h4 id="epoint2-get"><a href="#epoint2-get" class="headerlink" title="epoint2_get"></a>epoint2_get</h4><h4 id="epoint-getxyz"><a href="#epoint-getxyz" class="headerlink" title="epoint_getxyz"></a>epoint_getxyz</h4><p>函数原型：void epoint_getxyz(p,x,y,z) </p>
+<p>参数类型：epoint *p; big x,y,z; </p>
+<p>函数作用：提取活动**GF(p)**椭圆曲线上一点的原始(x，y，z)坐标</p>
+<h4 id="epoint2-getxyz"><a href="#epoint2-getxyz" class="headerlink" title="epoint2_getxyz"></a>epoint2_getxyz</h4><h4 id="epoint-init"><a href="#epoint-init" class="headerlink" title="epoint_init"></a>epoint_init</h4><p>函数原型：epoint* epoint_init() </p>
+<p>函数作用：将内存分配给GF(p)椭圆曲线上的一个点，并将其<strong>初始化为“无穷远点”</strong>。</p>
+<p>返回值:返回epoint类型点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">C=epoint_init();<br></code></pre></td></tr></table></figure>
+
+<p><strong>确保通过调用该函数初始化的所有椭圆曲线点最终通过调用epoint_free被释放。否则将导致内存泄漏</strong></p>
+<h4 id="epoint-init-mem"><a href="#epoint-init-mem" class="headerlink" title="epoint_init_mem"></a>epoint_init_mem</h4><h4 id="epoint2-norm"><a href="#epoint2-norm" class="headerlink" title="epoint2_norm"></a>epoint2_norm</h4><h4 id="epoint-set"><a href="#epoint-set" class="headerlink" title="epoint_set"></a>epoint_set</h4><p>函数原型： BOOL epoint_set(x,y,lsb,p)</p>
+<p>参数类型： big x,y;   int lsb; epoint *p;</p>
+<p>参数意义：</p>
+<p>函数作用：设置点p的（x,y）坐标，（x,y）在曲线上则返回true</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">p=epoint_init(); <br>epoint_set(x,x,<span class="hljs-number">1</span>,p); <br>    <span class="hljs-comment">/* decompress p */</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="epoint2-set"><a href="#epoint2-set" class="headerlink" title="epoint2_set"></a>epoint2_set</h4><h4 id="epoint-x"><a href="#epoint-x" class="headerlink" title="epoint_x"></a>epoint_x</h4><p>函数原型： BOOL epoint_x(x) </p>
+<p>参数类型：big x; </p>
+<p>函数作用：测试参数x是否是曲线上一点的有效坐标。用这种方法先测试一个x坐标，要比直接通过调用epoint_set在曲线上设置快，因为这样可以避免昂贵的模平方根。</p>
+<p>返回值:如果x是曲线点的坐标，则为真，否则为假</p>
+<h4 id="mul-brick"><a href="#mul-brick" class="headerlink" title="mul_brick"></a>mul_brick</h4><h4 id="mul2-brick"><a href="#mul2-brick" class="headerlink" title="mul2_brick"></a>mul2_brick</h4><h4 id="point-at-infinity"><a href="#point-at-infinity" class="headerlink" title="point_at_infinity *"></a>point_at_infinity *</h4><p>函数原型：BOOL point_at_infinity(p) </p>
+<p>参数类型：epoint *p; </p>
+<p>函数作用：测试椭圆曲线点是否是“无穷远点”。</p>
+<p>返回值：如果p是无穷远点，则为True，否则为false</p>
+<h4 id="sha256-init"><a href="#sha256-init" class="headerlink" title="sha256_init"></a>sha256_init</h4><p>函数原型：sha256_init(psh)</p>
+<p>参数类型：sha256 *psh</p>
+<p>函数功能：初始化安全哈希算法SHA-256的实例。必须在重新使用前调用。</p>
+<h4 id="sha256-process"><a href="#sha256-process" class="headerlink" title="sha256_process"></a>sha256_process</h4><p>函数原型：void shs256_process(psh,ch)</p>
+<p>参数类型：sha256 *psh; int ch;</p>
+<p>函数功能：处理单个字节。通常调用多次以向哈希进程提供输入。所有已处理字节的哈希值可通过后续调用shs256_hash来检索。</p>
+<h4 id="sha256-hash"><a href="#sha256-hash" class="headerlink" title="sha256_hash"></a>sha256_hash</h4><p>函数原型：void shs256_hash(psh,hash)</p>
+<p>参数类型：sha256 *psh; char hash[32];</p>
+<p>函数功能：在提供的数组中生成一个32字节（256位）的哈希值</p>
+<p>参考文献：</p>
+<p>1.官方文档</p>
+<p>2.<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Higgerw/p/10164179.html">https://www.cnblogs.com/Higgerw/p/10164179.html</a></p>
+<p>3.<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30734435/article/details/95364200">https://blog.csdn.net/weixin_30734435/article/details/95364200</a></p>
 
             </div>
             <hr>
@@ -298,7 +340,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/tools/">tools</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                    
+                      <a class="hover-with-bg" href="/categories/handbook/">handbook</a>
                     
                   </div>
                 
@@ -306,13 +350,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/tools/">tools</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
                     
-                      <a class="hover-with-bg" href="/tags/github/">github</a>
+                      <a class="hover-with-bg" href="/tags/skills/">skills</a>
                     
-                      <a class="hover-with-bg" href="/tags/PicGo/">PicGo</a>
-                    
-                      <a class="hover-with-bg" href="/tags/typora/">typora</a>
+                      <a class="hover-with-bg" href="/tags/miracl/">miracl</a>
                     
                   </div>
                 
@@ -329,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/15/ID3%E7%AE%97%E6%B3%95/">
+                      <a href="/2021/10/08/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ID3算法</span>
+                        <span class="hidden-mobile">hexo常用命令</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -339,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/15/OAuth2-0/">
-                        <span class="hidden-mobile">OAuth2.0</span>
+                      <a href="/2020/12/21/mircal%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E6%89%8B%E5%86%8C/">
+                        <span class="hidden-mobile">mircal常用函数手册</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
