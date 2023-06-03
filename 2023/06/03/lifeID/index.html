@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="An open-source, blockchain-based platform for self-sovereign identity">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="An open-source, blockchain-based platform for self-sovereign identity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lifeID">
+<meta property="og:url" content="http://yankel.github.com/2023/06/03/lifeID/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="An open-source, blockchain-based platform for self-sovereign identity">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-03T03:22:12.000Z">
+<meta property="article:modified_time" content="2023-06-03T03:23:44.847Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="DID">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>lifeID - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="lifeID">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-06-03 11:22" pubdate>
+        2023年6月3日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">lifeID</h1>
+            
+            <div class="markdown-body">
+              <p>An open-source, blockchain-based platform for self-sovereign identity</p>
+<span id="more"></span>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>身份盗用愈演愈烈</li>
+<li>身份管理使用广泛且频繁</li>
+</ul>
+<p>lifeID 基金会的使命是为每个人提供终身的、自主的数字身份，这将被称为一个人的“lifeID”。有了自我主权的数字身份，每个人都可以安全、轻松地管理所有需要身份验证的在线和现实世界交易，而无需依赖大型社交网络、公司或政府机构的第三方监督或控制。</p>
+<p>lifeID 旨在为用户提供与来自 Facebook 或 Google 登录的单点登录 (SSO) 相同的便利，<strong>但没有社交媒体登录伴随的许多风险和潜在的隐私侵犯</strong>。同样重要的是，它消除了个人身份信息 (PII) 被企业数据巨头货币化和出售以获取商业利益的可能性。它还消除了那些相同的公司实体因官僚主义的想法而拒绝访问的风险。</p>
+<p>lifeID 将被构建为一个开放、无需许可且高度安全的基于区块链的身份服务，称为 lifeID 平台。该平台将由自我维持、自筹资金的 lifeID 基金会部署和管理，lifeID 基金会是区块链生态系统的身份即服务 (IDaaS) 层，支持各种身份特定交易。</p>
+<h2 id="Identity-is-broken"><a href="#Identity-is-broken" class="headerlink" title="Identity is broken"></a>Identity is broken</h2><ul>
+<li><p>身份管理是一项艰巨的任务</p>
+</li>
+<li><p>当前的选项具有实际成本</p>
+<blockquote>
+<p>管理密码任务艰巨-&gt;不愿注册新用户、忘记密码</p>
+<p>单点登录：黑客破解程序并快速获取用户数据</p>
+</blockquote>
+</li>
+<li><p>社交媒体用户无法控制自己的身份 </p>
+<blockquote>
+<p>Facebook、谷歌、LinkedIn 等科技巨头控制着身份数据——而不是用户。这些公司不对用户负责。他们可以随时出于任何原因拒绝访问，并且不需要提供解释或追索权。</p>
+</blockquote>
+</li>
+<li><p>私有的、集中的身份平台不安全</p>
+</li>
+<li><p>在线世界和现实世界之间没有联系</p>
+<blockquote>
+<p>在现实世界中，实体环境中，在线登录没有用，迫使消费者随身携带装满物理 ID 的钱包，如健身房会员资格、驾照、门禁卡等。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Solving-identity-management-with-self-sovereign-identity"><a href="#Solving-identity-management-with-self-sovereign-identity" class="headerlink" title="Solving identity management with self-sovereign identity"></a>Solving identity management with self-sovereign identity</h2><ul>
+<li><p>控制</p>
+<blockquote>
+<p>基本要素是消费者拥有并控制所有适用的身份数据,此外，任何公司或政府机构都不应对管理任何数字身份拥有最终控制权。</p>
+<p>第二个要求是它必须有用和方便,例如，它必须作为所有在线活动的单点登录 Web 身份验证。</p>
+</blockquote>
+</li>
+<li><p>易于使用和方便</p>
+</li>
+<li><p>安全</p>
+<blockquote>
+<p>公共的、无需许可的区块链代表了最复杂的可用数字安全，使用共识机制和密码学。</p>
+</blockquote>
+</li>
+<li><p>隐私</p>
+<blockquote>
+<p>lifeID 的一个关键特性是，它将为用户提供通过<strong>利用经过验证的声明来确认其身份</strong>的能力，<strong>而不是向第三方提供个人详细信息</strong>以证明他们是他们所说的那个人。</p>
+</blockquote>
+</li>
+<li><p>自治</p>
+<blockquote>
+<p>目前的身份状态下，由政府机构和公司定义和确定身份；在LifeID中，用户自己控制自己的身份，他们将在没有干预、不必要的监督下管理它。</p>
+</blockquote>
+</li>
+<li><p>自主权身份和GDPR合规性</p>
+<blockquote>
+<p>GDPR 旨在通过将对身份数据的控制权交还给消费者来保护消费者。虽然 GDPR 适用于物理和数字身份管理，但它包括影响数字身份的条款，强调个人对其数据的控制。</p>
+<p>GDPR包括以下身份权利：</p>
+<ol>
+<li>访问权——您的数据由什么组成、如何使用以及谁有权访问。</li>
+<li>同意权——个人必须同意其数据的使用方式；他们也可以随时撤销同意。</li>
+<li>被遗忘权——个人有权要求数据控制者删除该控制者持有的有关该个人的任何或所有数据。</li>
+<li>便携权——个人有权在他们认为合适的时候获取、移动和提供对其数字数据的访问。</li>
+<li>数据最小化——这是自我主权识别的关键。仅处理每个特定交易目的所需的个人数据。该义务适用于收集的个人数据量、处理范围、存储期限和可访问性。从本质上讲，只应授予所需的最少量个人数据。</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="The-lifeID-platform-and-ecosystem"><a href="#The-lifeID-platform-and-ecosystem" class="headerlink" title="The lifeID platform and ecosystem"></a>The lifeID platform and ecosystem</h2><h3 id="lifeID-Platform"><a href="#lifeID-Platform" class="headerlink" title="lifeID Platform"></a>lifeID Platform</h3><p>首先，lifeID平台是一个去中心化的基于区块链的平台（开源），充当一个开放的<strong>身份提供者</strong>。它是一个<strong>智能合约系统</strong>，也称为自执行协议。</p>
+<h3 id="lifeID-SDK-amp-smartphone-App"><a href="#lifeID-SDK-amp-smartphone-App" class="headerlink" title="lifeID SDK &amp; smartphone App"></a>lifeID SDK &amp; smartphone App</h3><p>其次，lifeID 将提供一个软件开发工具包和智能手机App来播种和加速该平台的网络效应，此应用程序将提供自主身份界面、用户安全、密钥管理和凭证钱包。 lifeID 智能手机<strong>App将是开源</strong>的，任何人都可以开发自己的版本并根据自己的使用进行调整。 lifeID 智能手机应用程序旨在加速平台的使用，但不会有任何专有功能、访问权限或优先权。</p>
+<p>除了智能手机应用程序，lifeID 还将提供开源软件开发工具包 (SDK)。 SDK 的目标是为生态系统合作伙伴提供他们需要的工具，以便<strong>为他们的应用程序集成 lifeID 平台层</strong>。开发人员可以使用 SDK 跨各种设备创建身份解决方案。例如，使用lifeID SDK 开发的浏览器扩展可以访问该平台并允许免密码登录网站。诸如智能手表之类的物联网设备可以验证身份并提供对建筑物的物理访问。</p>
+<h3 id="lifeID-ecosystem"><a href="#lifeID-ecosystem" class="headerlink" title="lifeID ecosystem"></a>lifeID ecosystem</h3><p>第三，lifeID 正在与身份、区块链和多个垂直行业的生态系统合作伙伴合作，以确保 lifeID 平台成为事实上的自我主权身份的底层平台。</p>
+<p>为了激发 lifeID 生态系统的网络效应，lifeID 将把旧的身份技术与基于区块链的身份解决方案联系起来。该连接有望充当桥梁，使 lifeID 能够更轻松地连接到其他基于区块链的功能。</p>
+<h2 id="LifeID-platform-user-features"><a href="#LifeID-platform-user-features" class="headerlink" title="LifeID platform user features"></a>LifeID platform user features</h2><h3 id="Biometrically-secure-identity"><a href="#Biometrically-secure-identity" class="headerlink" title="Biometrically secure identity"></a>Biometrically secure identity</h3><p>任何人都可以使用 lifeID 平台创建个人数字标识符——该平台旨在用户终生使用。通过将 lifeID 平台与具有生物识别功能的智能手机和应用程序（如 lifeID 应用程序）相结合，用户将能够安全可靠地建立自己的身份，取代低效的在线密码和物理钥匙卡。</p>
+<p>更安全的架构：</p>
+<ol>
+<li>目前PII数据集中存储，成为黑客容易获取的高价值目标。使用 lifeID，<strong>PII 数据在用户设备上保持加密状态</strong>。黑客需要攻击数十亿个单独目标，而不是攻击一个大目标。</li>
+<li>最新一代的智能手机包含内置的基于硬件的生物特征识别，使其成为从物理世界到数字世界的理想桥梁。</li>
+<li>iPhone等智能手机属于“围墙式安全花园”，恶意软件更难渗透和暴露用户隐私数据。</li>
+<li>如果智能手机遭到破坏，基于 lifeID 的自主身份将<strong>允许用户撤销和更新用于证明其身份的安全密钥</strong>，使用不涉及智能手机的备份方式。</li>
+</ol>
+<h3 id="Individual-privacy"><a href="#Individual-privacy" class="headerlink" title="Individual privacy"></a>Individual privacy</h3><p>使用 lifeID，用户将对其个人身份信息的隐私保持 100% 的控制。<strong>身份信息不存储在服务器或“云”中，而仅以加密格式存储在用户的设备上</strong>。用户可以根据自己的隐私门槛选择如何备份这些信息。</p>
+<p>lifeID 平台的设计使其在最坏的情况下只会公开一个随机生成的标识符，该标识符代表关于个人的“已验证声明”。（？？？）</p>
+<p><strong>当第三方需要确认用户身份的某个方面时，只需向用户索取交易所需的特定属性的证明</strong>，而不需要收集和存储用户的所有隐私信息。该证明或“已核实的声明”将事先得到可信实体的确认，例如州机动车部门。该机制提供身份证明，例如年龄、家庭住址等，而不会暴露您的真实身份信息。这是一项基本的设计功能——第三方只能验证您身份的一个属性，他们无法访问身份本身。</p>
+<p>此外，您的身份数据是分区的，因此一旦第三方完成身份验证交易，他们就<strong>不能将该信息重新用于其他未经授权的身份验证或商业目的</strong>。此外，他们无法使用 lifeID 来监控或检索有关您身份的其他信息。</p>
+<h3 id="Seamless-identity-in-both-the-digital-and-physical-worlds"><a href="#Seamless-identity-in-both-the-digital-and-physical-worlds" class="headerlink" title="Seamless identity in both the digital and physical worlds"></a>Seamless identity in both the digital and physical worlds</h3><p>lifeID 平台上的用户身份将扩展到数字世界和物理世界。这意味着用户将能够通过相同的身份应用程序和界面使用手机  访问网站或建筑物。</p>
+<h3 id="No-passwords"><a href="#No-passwords" class="headerlink" title="No passwords"></a>No passwords</h3><p>通过使用具有生物识别功能的应用程序，用户将能够登录到他们的账户，而不需要记住、写下或输入密码。</p>
+<h3 id="Recover-and-backup"><a href="#Recover-and-backup" class="headerlink" title="Recover and backup"></a>Recover and backup</h3><p>lifeID 平台将提供多种密钥恢复选项，例如：</p>
+<ol>
+<li>自我备份</li>
+<li>使用可信任的朋友或亲戚进行备份</li>
+<li>使用可信组织进行备份</li>
+</ol>
+<h3 id="Verified-claims"><a href="#Verified-claims" class="headerlink" title="Verified claims"></a>Verified claims</h3><p>经验证的声明提供的额外好处是能够仅披露特定验证所需的信息。</p>
+<p>使用 lifeID，<strong>经过验证的声明永远不会存储在公共区块链上</strong>，因为声明包含有关身份所有者的私人信息。声明仅由身份所有者和发出声明的实体持有。</p>
+<p>如果发行人想要保留撤销声明的能力，他们可以添加撤销触发器。证明方可以出于各种原因触发撤销</p>
+<h3 id="Identity-information-is-never-stored-on-the-lifeID-platform"><a href="#Identity-information-is-never-stored-on-the-lifeID-platform" class="headerlink" title="Identity information is never stored on the lifeID platform"></a>Identity information is never stored on the lifeID platform</h3><p>所有 PII，如姓名、出生日期、当前居住地址等，都不会存储在 lifeID 平台上。此信息经过加密，仅存储在安全设备（例如此人的手机）上。</p>
+<p>链上存储的内容：</p>
+<ul>
+<li><p>去中心化标识符 (DID) </p>
+<blockquote>
+<p>DID 只是一个用于引用特定身份实例的唯一编号。它是查找特定身份描述符智能合约的关键。这类似于 DID 文档。</p>
+</blockquote>
+</li>
+<li><p>DID文档</p>
+</li>
+<li><p>由撤销密钥签名的  可验证声明的Hash（可选）</p>
+</li>
+<li><p>lifeID遵循由声明持有者公开的W3C DID规范。</p>
+</li>
+</ul>
+<h2 id="LifeID-platform-architecture"><a href="#LifeID-platform-architecture" class="headerlink" title="LifeID platform architecture"></a>LifeID platform architecture</h2><h3 id="How-lifeID-works：bridging-web-2-0-users-to-blockchain"><a href="#How-lifeID-works：bridging-web-2-0-users-to-blockchain" class="headerlink" title="How lifeID works：bridging web 2.0 users to blockchain"></a>How lifeID works：bridging web 2.0 users to blockchain</h3><p>lifeID平台由一组运行在区块链上的智能合约以及一些链下服务组成，这些服务将非基于区块链的应用程序与区块链生态系统连接起来。</p>
+<p>用户将通过软件“网关”与lifeID平台进行交互，该网关将现有基础设施和协议连接到基于区块链的平台。对于大多数浏览互联网的用户来说，他们将通过身份提供者(如OpenID Connect)与lifeID平台进行交互。OpenID Connect是网络服务器在用户点击“登录Facebook、Google或Twitter”时使用的认证协议。对于其他应用程序，比如进入建筑物，你的lifeID手机应用程序直接与建筑物管理系统通信。该建筑的管理系统集成了lifeID平台，以确认身份持有人的有效性。</p>
+<h3 id="Setting-up-and-using-entity"><a href="#Setting-up-and-using-entity" class="headerlink" title="Setting up and using entity"></a>Setting up and using entity</h3><p>lifeID 平台上身份的基本构建块称为实体或“信任锚”。 lifeID 平台上的实体可以代表人、组织或物理事物（例如门锁或智能设备）。这些实体&#x2F;信任锚使身份持有者能够管理用于证明控制权的加密密钥身份。 lifeID 平台上有专门定义的实体类型的一个原因是<strong>确保用户可以识别他们何时与物理世界中的另一个人、组织或设备进行交互</strong>。</p>
+<ul>
+<li><p>人类实体</p>
+<blockquote>
+<p>人类实体具有关联的智能合约，<strong>用户可以与之交互以管理代表其身份的加密密钥。</strong>与大多数其他可用的基于区块链的身份解决方案不同，<strong>用户的身份不是通过拥有 lifeID 平台中的某个加密私钥来定义的。相反，它由用户创建身份时设置的智能合约的状态表示。</strong></p>
+<p><strong>人类实体是假名的，确保这个智能合约中的任何内容都不能用来识别任何特定的人。</strong>此外，用户将拥有多个人类实体，每个实体用于与另一个lifeID身份进行交互。这些都可以通过 lifeID 的电话应用程序（或任何其他 lifeID 平台兼容的应用程序）进行管理。</p>
+</blockquote>
+</li>
+<li><p>组织实体</p>
+<blockquote>
+<p>组织实体可以包括公司、政府实体或非政府组织(NGO)</p>
+<p>与人类实体一样，组织也将通过lifeID平台上的智能合约来代表。但是，组织的智能合约将以<u>允许一个或多个用户管理组织的加密密钥的方式</u>构建。组织实体还将支持添加诸如姓名、地址、电话号码或其他相关详细信息等公共信息的能力。</p>
+</blockquote>
+</li>
+<li><p>IOT实体</p>
+<blockquote>
+<p>物联网实体是由人员或组织管理的物理设备。在lifeID平台上注册物联网设备身份将允许人们验证他们正在与正确的物联网实体进行交互</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="lifeID-and-DID"><a href="#lifeID-and-DID" class="headerlink" title="lifeID and DID"></a>lifeID and DID</h4><p>去中心化标识符(DID)用于唯一地标识一个组织、人或事物，并且完全在身份所有者的控制之下。它们不依赖于集中的注册中心、身份提供者或证书颁发机构。在lifeID平台上，这些<strong>DID被链接到一个基于区块链的智能合约</strong>，该合约包含证明链接DID的所有权和控制权所需的所有配置、元数据和逻辑。</p>
+<p>如果用户失去对 提供链接 DID 控制的加密私钥的访问时，则这种链接的智能合约使用户能够恢复对 DID 的使用。</p>
+<h3 id="blockchain-implementation"><a href="#blockchain-implementation" class="headerlink" title="blockchain implementation"></a>blockchain implementation</h3><p>lifeID 平台旨在<strong>在任何支持智能合约的区块链上运行</strong>。它以这种方式设计，以减少实施平台的摩擦，目标是成为无处不在的标准身份协议。例如，以太坊或其他支持智能合约的区块链上的身份实例作为仅特定于该区块链的智能合约存在。</p>
+<p>支撑 lifeID 平台的区块链必须满足以下要求：</p>
+<ul>
+<li><p>开发、无需许可的公共区块链</p>
+</li>
+<li><p>支持智能合约</p>
+</li>
+<li><p>分钟级确认</p>
+<blockquote>
+<p>对LifeID实体的更改必须在更新后一分钟内可供其他人使用。</p>
+</blockquote>
+</li>
+<li><p>支持零知识证明</p>
+</li>
+<li><p>可扩展性</p>
+<blockquote>
+<p>lifeID平台必须建立在可以扩展到数十亿用户的区块链上。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Buliding-on-the-lifeID-platform"><a href="#Buliding-on-the-lifeID-platform" class="headerlink" title="Buliding on the lifeID platform"></a>Buliding on the lifeID platform</h3><p>为了激发 lifeID 平台生态系统的网络效应，lifeID 将把旧的身份技术与基于区块链的身份解决方案联系起来。该连接将充当只读桥，以启用查找基于区块链的身份信息。</p>
+<p>lifeID 平台的推出将包括其中几个桥接组件的开源参考实现，包括：</p>
+<ul>
+<li>OIDC 身份提供者</li>
+<li>DID解析器</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DID/">DID</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/DID/">DID</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/30/Civic/">
+                        <span class="hidden-mobile">Civic</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -15,27 +15,26 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+  <meta name="description" content="Civic Whitepaper">
   <meta name="author" content="Yankel">
   <meta name="keywords" content="">
-  <meta name="description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+  <meta name="description" content="Civic Whitepaper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ID3算法原理及实现">
-<meta property="og:url" content="http://yankel.github.com/2023/05/15/ID3%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="Civic">
+<meta property="og:url" content="http://yankel.github.com/2023/05/30/Civic/index.html">
 <meta property="og:site_name" content="Yankel">
-<meta property="og:description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+<meta property="og:description" content="Civic Whitepaper">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515171543944.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515173747632.png">
-<meta property="article:published_time" content="2023-05-15T07:17:40.000Z">
-<meta property="article:modified_time" content="2023-05-20T03:12:11.235Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230530225105696.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230531111949476.png">
+<meta property="article:published_time" content="2023-05-30T11:17:05.000Z">
+<meta property="article:modified_time" content="2023-06-03T03:23:31.998Z">
 <meta property="article:author" content="Yankel">
-<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="DID">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230530225105696.png">
   
-  <title>ID3算法原理及实现 - Yankel</title>
+  <title>Civic - Yankel</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -181,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ID3算法原理及实现">
+            <span class="h2" id="subtitle" title="Civic">
               
             </span>
 
@@ -191,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-05-15 15:17" pubdate>
-        2023年5月15日 下午
+      <time datetime="2023-05-30 19:17" pubdate>
+        2023年5月30日 晚上
       </time>
     </span>
   
@@ -202,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      2.8k 字
     </span>
   
 
@@ -211,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      9 分钟
     </span>
   
 
@@ -240,45 +239,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ID3算法原理及实现</h1>
+            <h1 style="display: none">Civic</h1>
             
             <div class="markdown-body">
-              <p>ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。</p>
+              <p>Civic Whitepaper</p>
 <span id="more"></span>
 
-<h2 id="ID3算法原理及实现"><a href="#ID3算法原理及实现" class="headerlink" title="ID3算法原理及实现"></a>ID3算法原理及实现</h2><h3 id="算法概述"><a href="#算法概述" class="headerlink" title="算法概述"></a>算法概述</h3><p>ID3算法是一种<strong>分类预测</strong>算法，算法的<strong>核心是“信息熵”</strong>。ID3算法通过计算每个属性的信息增益，认为信息增益高的是好属性，每次划分选取信息增益最高的属性为划分标准，重复这个过程，直至生成一个能完美分类训练样例的决策树。</p>
-<p>决策树是对数据进行分类，以此达到预测的目的。该决策树方法先根据训练集数据形成决策树，如果该树不能对所有对象给出正确的分类，那么选择一些例外加入到训练集数据中，重复该过程一直到形成正确的决策集。决策树代表着决策集的树形结构。</p>
-<h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p>决策树(decision tree)是一类常见的机器学习方法。例如，我们要 对 “这是好瓜吗?”这样的问题进行决策时，通常会进行一系列的判断或“子决策”：我们先看“它是什么颜色?”，如果是 “青绿色”，则我 们再看“它的根蒂是什么形态?”，如果是“蜷缩 ”，我们再判断“它敲起来是什么声音?”，最后，我们得出最终决策：这是个好瓜。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png" srcset="/img/loading.gif" lazyload alt="image-20230515160908712"></p>
-<p>决策过程中提出的每个判定问题都是对某个属性的“测试 ”，每个测试的结果或是导出最终结论，或是导出进一步的判定问题，其考虑范围是在上次决策结果的限定范围之内。决策树学习的目的是为 了产生一棵泛化能力强，即处理未见示例能力强的决策树。</p>
-<h3 id="信息熵和信息增益"><a href="#信息熵和信息增益" class="headerlink" title="信息熵和信息增益"></a>信息熵和信息增益</h3><p>&#x3D;&#x3D;目标：选择最佳分类策略后，整体的信息熵变得最小。&#x3D;&#x3D;</p>
-<p>决策树的关键是如何选择最优划分属性，一般而言，随着划分过程不断进行，我们希望决策树的分支结点所包含的样本尽可能属于同一类别，即结点的“纯度”(purity)越来越高。</p>
-<p>经典的 “不纯度”的指标有三种，分别是<strong>信息增益</strong>（ID3 算法）、<strong>信息增益率</strong>（C4.5 算法）以及<strong>基尼指数</strong>（Cart 算法）</p>
-<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>信息熵是衡量样本集合纯度常用的一种指标，假设当前样本集合D中第$k$类样本所占的比例为$p_k(k&#x3D;1,2,…,|y|)$，则D的信息熵定义为<br>$$<br>Entry(D)&#x3D;-\sum_{k&#x3D;1}^{|y|}p_klog_2\ p_k<br>$$<br><strong>Ent(D)的值越小，则D的纯度越高</strong>；即信息熵越大，不确定性越大。</p>
-<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>假设离散属性$a$有$V$个可能的取值${a^1,a^2,…,a^V}$，则如果使用属性$a$来对样本集合D进行分类，会产生$V$个不同的分支，其中第$v$个分支结点包含了D中所有在属性$a$上取值为$a^v$的样本，记为$D^v$，可以根据信息熵的定义计算$D^v$的信息熵，再考虑不同的分支结点包含的样本数不同，给分支结点赋予权重$|D^v|&#x2F;|D|$，于是可以计算<strong>使用属性$a$对样本集进行划分所获得的信息增益</strong>：<br>$$<br>Gain(D,a)&#x3D;Ent(D)-\sum_{v&#x3D;1}^V \frac{|D^v|}{|D|}Ent(D^v)<br>$$<br>一般而言，信息增益越大，则意味着使用属性a来进行划分所获得的“纯度提升”越大。因此，我们可用信息增益来进行决策树的划分属性选择。</p>
-<h3 id="ID3算法流程及实例"><a href="#ID3算法流程及实例" class="headerlink" title="ID3算法流程及实例"></a>ID3算法流程及实例</h3><h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>核心思想：在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。</p>
-<p>具体方法：从根结点（root node）开始，对结点计算所有可能的特征信息增益，选择信息增益最大的特征作为结点的特征，由该特征的不同取值建立子结点；再对子结点递归地调用以上方法，构建决策树；直到所有特征的信息增益均很小或没有特征可以选择。最后得到一个决策树。</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>数据集：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515171543944.png" srcset="/img/loading.gif" lazyload alt="image-20230515171543944"></p>
-<p>该数据集包含17个训练样例，用以学习一棵能预测没剖开的是不是好瓜的决策树。 在决策树学习开始时，根结点包含D中的所有样例，其中正例占$p_1&#x3D;\frac{8}{17}$，反例占$p_2&#x3D;\frac{9}{17}$，于是，根据定义可计算出根结点的信息熵为<br>$$<br>Ent(D)&#x3D;-\sum_{k&#x3D;1}^2p_k \ log_2\ p_k&#x3D;-(\frac{8}{17}log_2\frac{8}{17}+\frac{9}{17}log_2\frac{9}{17})&#x3D;0.998<br>$$<br>下面计算当前属性集合{色泽，根蒂，敲声，纹理，脐部，触感}中每个属性的信息增益。</p>
-<p>以属性”色泽”为例，它有三个可能的取值{青绿，乌黑，浅白}，如果使用该属性对D进行划分，则可以得到三个子集，记为$D^1$（色泽&#x3D;青绿），$D^2$(色泽&#x3D;乌黑)，$D^3$（色泽&#x3D;浅白）</p>
-<p>子集$D^1$包含的样本共6个，编号为{1,4,6,10,13,17}，其中正例占$p_1&#x3D;\frac{3}{6}$，反例占$p_2&#x3D;\frac{3}{6}$；子集$D^2$包含的样本共6个，编号为{2,3,7,8,9,15}，其中正例占$p_1&#x3D;\frac{4}{6}$，反例占$p_2&#x3D;\frac{2}{6}$；子集$D^3$包含的样本共5个，编号为{5,11,12,14,16}，其中正例占$p_1&#x3D;\frac{1}{5}$，反例占$p_2&#x3D;\frac{4}{5}$；计算出用“色泽”划分之后所获得的 3 个分支结点的信息熵为</p>
-<p>$$<br>Ent(D^1)&#x3D;-(\frac{3}{6}log_2\frac{3}{6}+\frac{3}{6}log_2\frac{3}{6})&#x3D;1.000,<br>$$</p>
-<p>$$<br>Ent(D^2)&#x3D;-(\frac{4}{6}log_2\frac{4}{6}+\frac{2}{6}log_2\frac{2}{6})&#x3D;0.918,<br>$$</p>
-<p>$$<br>Ent(D^3)&#x3D;-(\frac{1}{5}log_2\frac{1}{5}+\frac{4}{5}log_2\frac{4}{5})&#x3D;0.722<br>$$</p>
-<p>因此，计算出属性色泽的信息增益为：<br>$$<br>Gain(D,色泽)&#x3D;Ent(D)-\sum_{v&#x3D;1}^3\frac{|D^v|}{|D|}Ent(D^v)<br>$$</p>
-<p>$$<br>Gain(D,色泽)&#x3D;Ent(D)-\sum_{v&#x3D;1}^3\frac{|D^v|}{|D|}Ent(D^v)<br>$$</p>
-<p>$$<br>&#x3D;0.998- (\frac{6}{17}×1.000+\frac{6}{17}×0.918+\frac{5}{17}×0.722）&#x3D;0.109<br>$$<br>类似的，计算其他属性的信息增益：</p>
-<p>$$ Gain（D,根蒂）&#x3D; 0.143; Gain（D , 敲声）&#x3D; 0.141;  $$$$ \<br>Gain（D ,纹理）&#x3D; 0.381; Gain（D , 脐部）&#x3D; 0.289;$$ $$  \<br>Gain（D ,触感）&#x3D; 0.006.$$</p>
-<p>属性 “纹理”的信息增益最大，于是它被选为划分属性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515173747632.png" srcset="/img/loading.gif" lazyload alt="image-20230515173747632"></p>
-<p>然后，决策树学习算法将对每个分支结点做进一步划分。</p>
-<h3 id="ID3算法缺点"><a href="#ID3算法缺点" class="headerlink" title="ID3算法缺点"></a>ID3算法缺点</h3><ul>
-<li>ID3没有剪枝策略，容易过拟合</li>
-<li>信息增益准则对可取值数目较多的特征有所偏好。因为相同条件下，取值比较多的特征的信息增益大于取值较少的特征</li>
-<li>只能用于处理离散分布的特征，没有考虑到特征连续值的情况，即如人的身高、体重都是连续值，无法在ID3算法中应用，即ID3算法更适合做分类</li>
-<li>没有考虑缺失值</li>
+<h3 id="Civic’s-existing-identity-products-and-services"><a href="#Civic’s-existing-identity-products-and-services" class="headerlink" title="Civic’s existing identity products and services"></a>Civic’s existing identity products and services</h3><p>目前，Civic 提供了一个名为 Civic Secure ldentity Platform（简称“SIP”）的数字身份平台，个人可以通过下载 Civic Secure Identity App（简称“Civic App”），在其设备上设置数字身份，并验证其身份来访问该平台，从而成为Civil用户。Civil App使用高级加密和生物识别锁（例如指纹 ID）将用户的 PII 安全地存储在用户的手机上。通过将此数据保留在用户控制中，Civic App 使黑客和其他恶意团体更难获得对用户信息的访问权限。</p>
+<p>最初，用户根据要求将他们的 PII 捕获到 Civic App，然后由 Civic 进行彻底的验证过程。一旦完全验证，Civic将这些数据的证明写入区块链，然后数据的接收者可以使用区块链来验证PII的真实性和所有权。</p>
+<p>Civic 的身份合作伙伴可以通过自定义 二维码请求用户的信息，用户可以使用 Civic App 进行扫描。一旦用户使用他或她的生物识别技术解锁 Civic App，用户就可以扫描这些二维码，准确查看请求的信息，并选择是否批准或拒绝请求。</p>
+<p>因此，SlP 允许 根据请求者设置的要求，在用户和身份请求者之间进行自愿信息交换。这样，SlP 允许对由 Civic 或 Civic 身份合作伙伴验证的身份数据进行实时认证，并安全地共享该数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230530225105696.png" srcset="/img/loading.gif" lazyload alt="image-20230530225105696"></p>
+<h3 id="Civic‘s-planned-identity-ecosystem"><a href="#Civic‘s-planned-identity-ecosystem" class="headerlink" title="Civic‘s planned identity ecosystem"></a>Civic‘s planned identity ecosystem</h3><p>在其下一阶段的发展中，借助代币销售，Civic 打算超越其现有产品和服务，为 IDV 服务开发一个完全去中心化的 Civic 生态系统（“生态系统”）。该生态系统将由三个新组成部分组成：(1) 各种智能合约；(2) 称为 Civic 代币或“cVc”的本土实用代币；以及 (3) 由 Civic 和其他公司推出的新软件应用程序，允许参与者在生态系统内进行交互。</p>
+<p>用户将使用 Civic 应用程序将其数据存储在个人设备上，并可选择备份到基于云或分布式存储平台上的个人帐户。</p>
+<h4 id="the-mechanics-of-attestation"><a href="#the-mechanics-of-attestation" class="headerlink" title="the mechanics of attestation"></a>the mechanics of attestation</h4><p>存储在用户设备上的Pll可以由验证器来验证。用户可以与生态系统中信任给定验证器的任何其他参与者共享Pll和任何证明。</p>
+<p>用户的Pll以层次结构构成，包含类似于SSN、地址、城市、国家和出生日期的元素。这些数据遵循一个已定义的模型，Civic的目的是遵循现有的行业标准，甚至为行业的进一步标准化做出贡献。</p>
+<p>证明的可证明性是通过将数据组织到Merkle树来实现的，其中每个节点代表Pll的一个元素(例如，姓名)，每个节点包含其内容的哈希值及其子节点的哈希值(例如，姓和名)。这将产生一个“根哈希”(也称为默克尔根)，可以用作被证明数据的指纹。此根哈希记录在区块链中，并由验证者签名，对特定 Pll 进行证明。被称为“随机数”的任意数字被用于随机化结构化数据上的哈希值，这些数据具有相对较小的可能值范围，将任何哈希值被反转的风险降至最低。如果用户不希望显示所有被证明的底层Pll，则可以选择性地显示Merkle树的部分，并为用户不希望显示的任何元素提供哈希值。</p>
+<blockquote>
+<p>这种结构有两个优点：（1）它通过允许用户在不同情况下有选择地透露个人信息来增强用户控制； (2) 通过使用区块链的属性来证明数据在做出证明后没有被篡改，从而提高安全性。</p>
+</blockquote>
+<p>参与者复制哈希的唯一方法是从原始数据创建它。这允许用户与生态系统中的另一个参与者共享数据，并证明它与验证器之前证明的数据相同。如果验证者因任何原因撤销其认证，则可以在相关的区块链交易中反映出来，但认证的细节永远无法更改。记录这些交易的区块链目前是比特币区块链，因为它的完整性和广泛采用，但同样的设计也可以在任何其他区块链平台上使用。</p>
+<p>用于记录这些证明的方法是创建派生地址，这需要花费少量加密货币。使用椭圆曲线密码ECC的加法属性可以将root hash转化为一个有效的区块链地址：$k_{priv}+h&#x3D;k_{attest}$，其设计方式使得无法确定与地址相关联的用户和验证者。这对于保护参与者的隐私至关重要。</p>
+<h3 id="Ecosystem-token-CVC"><a href="#Ecosystem-token-CVC" class="headerlink" title="Ecosystem token(CVC)"></a>Ecosystem token(CVC)</h3><p>Civic 拟引入一种 Civic 代币，即 CVC，作为参与者之间在生态系统内进行身份相关交易的一种结算形式。交易中支付的 CvC 将作为共享信息的奖励分发给 Validator 和 User。他们分享CVC的比例由智能合约定义，可以通过生态系统参与者的共识进行调整。</p>
+<p>拥有 CVC 的 Civic 用户可以使用他们的 CVC 直接从 Civic 购买现有服务。Civic 还可以构建额外的以身份为中心的服务，这些服务可以交换代币，包括：</p>
+<ul>
+<li>进行个人背景调查的服务；</li>
+<li>区块链公证服务，可以证明身份和文件的真实性；</li>
+<li>暗网监控和搜索；</li>
+<li>访问个人信用报告；</li>
+<li>点对点身份服务。</li>
 </ul>
+<h3 id="A-market-for-efficient-attestation-of-User-data"><a href="#A-market-for-efficient-attestation-of-User-data" class="headerlink" title="A market for efficient attestation of User data"></a>A market for efficient attestation of User data</h3><ol>
+<li>用户向服务提供商A申请产品或服务，并从civic App向他们发送所需的Pll。</li>
+<li>服务提供商A使用其现有的验证方法验证用户的PII。</li>
+<li>通过参考存储在用户设备上的 PII，服务提供商A计算该 PII 的哈希值并在区块链上记录对该 PII 的证明。证明还可能包括支持元数据，例如其验证级别、与服务提供商 A 的验证过程相关的详细信息或任何适用的行业标准（例如 NIST、FIPS 或 PIV 标准）。然后将此证明的区块链交易详细信息提供给用户.</li>
+<li>稍后，用户向服务提供商 B 申请产品或服务。</li>
+<li>服务提供商 B 请求访问用户 PII 的全部或某些部分，包括围绕服务提供商 B 愿意接受的数据的规则和要求。Civic 应用程序随后将确定是否满足这些要求。</li>
+<li>假设用户已经并且愿意共享所请求的数据，服务提供商B和用户同意一个双方都可以接受的验证器，该验证器先前已经对数据以及围绕该数据的规则和要求进行了验证。在这种情况下，我们将假定可相互接受的验证者是服务提供者A，它为其认证提供价格(以cvC表示)，并且服务提供者B接受该价格</li>
+<li>然后，用户向服务提供商 B 发送服务提供商 A 证明中数据类型的概述，以及使服务提供商 B 能够找到和查看与服务提供商A相关的区块链交易详细信息的必要信息，作为区块链上的证明。然后，服务提供商 B 将能够为该 PII重新创建哈希，并将它们与区块链上的交易进行比较，从而确认所请求数据的可用性。如果服务提供商B对产生的哈希值感到满意，那么服务提供商B可以购买证明，并支付与该证明价格相对应的cvC金额(通过智能合约)到托管。</li>
+<li>一旦服务提供商 B 将 cvC 支付到托管中，用户就可以通过他&#x2F;她的 Civic App，向服务提供商 B 发送带有请求内容的纯文本 Pll。</li>
+<li>为完成交易，用户触发 cvC 从托管中释放，该 cvC 按智能合约定义的比例在用户和服务提供商 A（原始验证器）之间共享。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230531111949476.png" srcset="/img/loading.gif" lazyload alt="image-20230531111949476"></p>
 
             </div>
             <hr>
@@ -288,7 +290,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Machine-Learning/">Machine Learning</a>
+                      <a class="hover-with-bg" href="/categories/DID/">DID</a>
                     
                   </div>
                 
@@ -296,7 +298,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Machine-Learning/">Machine Learning</a>
+                      <a class="hover-with-bg" href="/tags/DID/">DID</a>
                     
                   </div>
                 
@@ -313,9 +315,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/28/DID-EverID/">
+                      <a href="/2023/06/03/lifeID/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">EverID</span>
+                        <span class="hidden-mobile">lifeID</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -323,8 +325,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/15/PicGo-github-%E5%9B%BE%E5%BA%8A/">
-                        <span class="hidden-mobile">PicGo+github+typora 图床</span>
+                      <a href="/2023/05/28/DID-EverID/">
+                        <span class="hidden-mobile">EverID</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
