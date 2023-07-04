@@ -15,27 +15,29 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+  <meta name="description" content="BP算法是由学习过程由信号的正向传播与误差的反向传播两个过程组成。由于多层前馈网络的训练经常采用误差反向传播算法，人们也常把将多层前馈网络直接称为BP网络。">
   <meta name="author" content="Yankel">
   <meta name="keywords" content="">
-  <meta name="description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+  <meta name="description" content="BP算法是由学习过程由信号的正向传播与误差的反向传播两个过程组成。由于多层前馈网络的训练经常采用误差反向传播算法，人们也常把将多层前馈网络直接称为BP网络。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ID3算法原理">
-<meta property="og:url" content="http://yankel.github.com/2023/05/15/ID3%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="BP算法">
+<meta property="og:url" content="http://yankel.github.com/2023/06/26/BP%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Yankel">
-<meta property="og:description" content="ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。">
+<meta property="og:description" content="BP算法是由学习过程由信号的正向传播与误差的反向传播两个过程组成。由于多层前馈网络的训练经常采用误差反向传播算法，人们也常把将多层前馈网络直接称为BP网络。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515171543944.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515173747632.png">
-<meta property="article:published_time" content="2023-05-15T07:17:40.000Z">
-<meta property="article:modified_time" content="2023-06-29T02:15:03.403Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626162520176.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627102707493.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627154520676.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626165418477.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626224501429.png">
+<meta property="article:published_time" content="2023-06-26T07:48:40.000Z">
+<meta property="article:modified_time" content="2023-07-04T03:05:25.169Z">
 <meta property="article:author" content="Yankel">
 <meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626162520176.png">
   
-  <title>ID3算法原理 - Yankel</title>
+  <title>BP算法 - Yankel</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -181,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ID3算法原理">
+            <span class="h2" id="subtitle" title="BP算法">
               
             </span>
 
@@ -191,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-05-15 15:17" pubdate>
-        2023年5月15日 下午
+      <time datetime="2023-06-26 15:48" pubdate>
+        2023年6月26日 下午
       </time>
     </span>
   
@@ -202,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.3k 字
     </span>
   
 
@@ -211,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      10 分钟
     </span>
   
 
@@ -240,44 +242,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ID3算法原理</h1>
+            <h1 style="display: none">BP算法</h1>
             
             <div class="markdown-body">
-              <p>ID3算法是一种贪心算法，用来构造决策树。ID3算法起源于概念学习系统（CLS），以信息熵的下降速度为选取测试属性的标准，即在每个节点选取还尚未被用来划分的具有最高信息增益的属性作为划分标准，然后继续这个过程，直到生成的决策树能完美分类训练样例。</p>
+              <p>BP算法是由学习过程由信号的正向传播与误差的反向传播两个过程组成。由于多层前馈网络的训练经常采用误差反向传播算法，人们也常把将多层前馈网络直接称为BP网络。</p>
 <span id="more"></span>
 
-<h2 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h2><h3 id="1-算法概述"><a href="#1-算法概述" class="headerlink" title="1. 算法概述"></a>1. 算法概述</h3><p>ID3算法是一种<strong>分类预测</strong>算法，算法的<strong>核心是“信息熵”</strong>。ID3算法通过计算每个属性的信息增益，认为信息增益高的是好属性，每次划分选取信息增益最高的属性为划分标准，重复这个过程，直至生成一个能完美分类训练样例的决策树。</p>
-<p>决策树是对数据进行分类，以此达到预测的目的。该决策树方法先根据训练集数据形成决策树，如果该树不能对所有对象给出正确的分类，那么选择一些例外加入到训练集数据中，重复该过程一直到形成正确的决策集。决策树代表着决策集的树形结构。</p>
-<h3 id="2-决策树"><a href="#2-决策树" class="headerlink" title="2. 决策树"></a>2. 决策树</h3><p>决策树(decision tree)是一类常见的机器学习方法。例如，我们要 对 “这是好瓜吗?”这样的问题进行决策时，通常会进行一系列的判断或“子决策”：我们先看“它是什么颜色?”，如果是 “青绿色”，则我 们再看“它的根蒂是什么形态?”，如果是“蜷缩 ”，我们再判断“它敲起来是什么声音?”，最后，我们得出最终决策：这是个好瓜。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515160908712.png" srcset="/img/loading.gif" lazyload alt="image-20230515160908712"></p>
-<p>决策过程中提出的每个判定问题都是对某个属性的“测试 ”，每个测试的结果或是导出最终结论，或是导出进一步的判定问题，其考虑范围是在上次决策结果的限定范围之内。决策树学习的目的是为 了产生一棵泛化能力强，即处理未见示例能力强的决策树。</p>
-<h3 id="3-信息熵和信息增益"><a href="#3-信息熵和信息增益" class="headerlink" title="3. 信息熵和信息增益"></a>3. 信息熵和信息增益</h3><p>&#x3D;&#x3D;目标：选择最佳分类策略后，整体的信息熵变得最小。&#x3D;&#x3D;</p>
-<p>决策树的关键是如何选择最优划分属性，一般而言，随着划分过程不断进行，我们希望决策树的分支结点所包含的样本尽可能属于同一类别，即结点的“纯度”(purity)越来越高。</p>
-<p>经典的 “不纯度”的指标有三种，分别是<strong>信息增益</strong>（ID3 算法）、<strong>信息增益率</strong>（C4.5 算法）以及<strong>基尼指数</strong>（Cart 算法）</p>
-<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>信息熵是衡量样本集合纯度常用的一种指标，假设当前样本集合D中第$k$类样本所占的比例为$p_k(k&#x3D;1,2,…,|y|)$，则D的信息熵定义为<br>$$<br>Entry(D)&#x3D;-\sum_{k&#x3D;1}^{|y|}p_klog_2\ p_k<br>$$<br><strong>Ent(D)的值越小，则D的纯度越高</strong>；即信息熵越大，不确定性越大。</p>
-<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>假设离散属性$a$有$V$个可能的取值${a^1,a^2,…,a^V}$，则如果使用属性$a$来对样本集合D进行分类，会产生$V$个不同的分支，其中第$v$个分支结点包含了D中所有在属性$a$上取值为$a^v$的样本，记为$D^v$，可以根据信息熵的定义计算$D^v$的信息熵，再考虑不同的分支结点包含的样本数不同，给分支结点赋予权重$|D^v|&#x2F;|D|$，于是可以计算<strong>使用属性$a$对样本集进行划分所获得的信息增益</strong>：<br>$$<br>Gain(D,a)&#x3D;Ent(D)-\sum_{v&#x3D;1}^V \frac{|D^v|}{|D|}Ent(D^v)<br>$$<br>一般而言，信息增益越大，则意味着使用属性a来进行划分所获得的“纯度提升”越大。因此，我们可用信息增益来进行决策树的划分属性选择。</p>
-<h3 id="4-ID3算法流程及实例"><a href="#4-ID3算法流程及实例" class="headerlink" title="4. ID3算法流程及实例"></a>4. ID3算法流程及实例</h3><h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>核心思想：在决策树各个结点上应用信息增益准则选择特征，递归地构建决策树。</p>
-<p>具体方法：从根结点（root node）开始，对结点计算所有可能的特征信息增益，选择信息增益最大的特征作为结点的特征，由该特征的不同取值建立子结点；再对子结点递归地调用以上方法，构建决策树；直到所有特征的信息增益均很小或没有特征可以选择。最后得到一个决策树。</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>数据集：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515171543944.png" srcset="/img/loading.gif" lazyload alt="image-20230515171543944"></p>
-<p>该数据集包含17个训练样例，用以学习一棵能预测没剖开的是不是好瓜的决策树。 在决策树学习开始时，根结点包含D中的所有样例，其中正例占$p_1&#x3D;\frac{8}{17}$，反例占$p_2&#x3D;\frac{9}{17}$，于是，根据定义可计算出根结点的信息熵为<br>$$<br>Ent(D)&#x3D;-\sum_{k&#x3D;1}^2p_k \ log_2\ p_k&#x3D;-(\frac{8}{17}log_2\frac{8}{17}+\frac{9}{17}log_2\frac{9}{17})&#x3D;0.998<br>$$<br>下面计算当前属性集合{色泽，根蒂，敲声，纹理，脐部，触感}中每个属性的信息增益。</p>
-<p>以属性”色泽”为例，它有三个可能的取值{青绿，乌黑，浅白}，如果使用该属性对D进行划分，则可以得到三个子集，记为$D^1$（色泽&#x3D;青绿），$D^2$(色泽&#x3D;乌黑)，$D^3$（色泽&#x3D;浅白）</p>
-<p>子集$D^1$包含的样本共6个，编号为{1,4,6,10,13,17}，其中正例占$p_1&#x3D;\frac{3}{6}$，反例占$p_2&#x3D;\frac{3}{6}$；子集$D^2$包含的样本共6个，编号为{2,3,7,8,9,15}，其中正例占$p_1&#x3D;\frac{4}{6}$，反例占$p_2&#x3D;\frac{2}{6}$；子集$D^3$包含的样本共5个，编号为{5,11,12,14,16}，其中正例占$p_1&#x3D;\frac{1}{5}$，反例占$p_2&#x3D;\frac{4}{5}$；计算出用“色泽”划分之后所获得的 3 个分支结点的信息熵为</p>
-<p>$$<br>Ent(D^1)&#x3D;-(\frac{3}{6}log_2\frac{3}{6}+\frac{3}{6}log_2\frac{3}{6})&#x3D;1.000,<br>$$</p>
-<p>$$<br>Ent(D^2)&#x3D;-(\frac{4}{6}log_2\frac{4}{6}+\frac{2}{6}log_2\frac{2}{6})&#x3D;0.918,<br>$$</p>
-<p>$$<br>Ent(D^3)&#x3D;-(\frac{1}{5}log_2\frac{1}{5}+\frac{4}{5}log_2\frac{4}{5})&#x3D;0.722<br>$$</p>
-<p>因此，计算出属性色泽的信息增益为：<br>$$<br>Gain(D,色泽)&#x3D;Ent(D)-\sum_{v&#x3D;1}^3\frac{|D^v|}{|D|}Ent(D^v)<br>$$</p>
-<p>$$<br>&#x3D;0.998- (\frac{6}{17}×1.000+\frac{6}{17}×0.918+\frac{5}{17}×0.722）&#x3D;0.109<br>$$<br>类似的，计算其他属性的信息增益：</p>
-<p>$$ Gain（D,根蒂）&#x3D; 0.143; Gain（D , 敲声）&#x3D; 0.141;  $$$$ \<br>Gain（D ,纹理）&#x3D; 0.381; Gain（D , 脐部）&#x3D; 0.289;$$ $$  \<br>Gain（D ,触感）&#x3D; 0.006.$$</p>
-<p>属性 “纹理”的信息增益最大，于是它被选为划分属性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230515173747632.png" srcset="/img/loading.gif" lazyload alt="image-20230515173747632"></p>
-<p>然后，决策树学习算法将对每个分支结点做进一步划分。</p>
-<h3 id="5-ID3算法缺点"><a href="#5-ID3算法缺点" class="headerlink" title="5. ID3算法缺点"></a>5. ID3算法缺点</h3><ul>
-<li>ID3没有剪枝策略，容易过拟合</li>
-<li>信息增益准则对可取值数目较多的特征有所偏好。因为相同条件下，取值比较多的特征的信息增益大于取值较少的特征</li>
-<li>只能用于处理离散分布的特征，没有考虑到特征连续值的情况，即如人的身高、体重都是连续值，无法在ID3算法中应用，即ID3算法更适合做分类</li>
-<li>没有考虑缺失值</li>
+<h3 id="1-人工神经元"><a href="#1-人工神经元" class="headerlink" title="1. 人工神经元"></a>1. 人工神经元</h3><p>神经网络中最基本的成分是神经元(neuron)模型，在生物神经网络中，每个神经元与其他神经元相连，当 它 “兴奋”时, 就会向相连的神经元发送化学物质，从而改变这些神经元内的电位；如果某神经元的电位超过了一个“阈值”(threshold)，那么它就会被激活，即 “兴奋” 起来，向其他神经元发送化学物质。</p>
+<p>1943 [McCulloch and Pitts, 1943]将上述情形抽象为如下图所示的简单模型，这就是一直沿用至今的“M -P 神经元模型”。在这个模型中，神经元接 收到来自几个其他神经元传递过来的输入信号，这些输入信号通过带权重的连 接(connection)进行传递，神经元接收到的总输入值将与神经元的阈值进行比较，然后通过“激活函数”(activation function)处理以产生神经元的输出。把许多个这样的神经元按一定的层次结构连接起来，就得到了神经网络。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626162520176.png" srcset="/img/loading.gif" lazyload alt="image-20230626162520176"></p>
+<p>图中$x_i \sim x_n$是从其他神经元传来的输入信号，$w_{ij}$表示从神经元$j$到神经元$i$的连接权值，$\theta$表示一个阈值，那么神经元$i$的输出与输入的关系表示为<br>$$<br>net_i&#x3D;\sum_{j&#x3D;1}^nw_{ij}x_j-\theta<br>$$</p>
+<p>$$<br>y_i&#x3D;f(net_i)<br>$$</p>
+<p>式中$y_i$表示神经元$i$的输出，函数f成为<code>激活函数</code>或转移函数。如果将阈值看成是神经元$i$的一个输入$x_0$的权重$w_{i0}$，则上述公式可以简化为<br>$$<br>net_i&#x3D;\sum_{j&#x3D;0}^n w_{ij}x_j<br>$$<br>选择的激活函数不同，$y_i$的取值范围也不同，而函数f通常要求选择可微的函数，通常选择Sigmoid函数<br>$$<br>sigmoid function：f(x)&#x3D;\frac{1}{1+e^{-x}}<br>$$<br>函数图像如下所示。该函数具有以下特性：非线性、单调性、无限次可微，并且当权值很大时可近似阈值函数，当权值很小时可近似线性函数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627102707493.png" srcset="/img/loading.gif" lazyload alt="image-20230627102707493"></p>
+<h3 id="2-前馈神经网络"><a href="#2-前馈神经网络" class="headerlink" title="2. 前馈神经网络"></a>2. 前馈神经网络</h3><p>构成前馈神经网络的神经元接受前一级输入，并输出到下一级，无反馈。其节点分为两类:输入节点与计算单元。每个计算单元可有任意个输入，但只有一个输出，而输出可耦合到任意多个其他节点的输入。前馈网络通常分为不同的层，第$i$层的输入只与第$i–1$层的输出相联。输入节点为第一层。输入和输出节点由于可与外界相连，称为可见层，而其他的中间层则称为隐藏层。而其中三层前馈网络又是其特例，三层前馈网络由输入层、中间层和输出层构成，有两个计算层，也称三层感知器，能够求解非线性问题。三层或三层以上的前馈网络通常又被叫做多层感知器(Multi-Layer Perceptron，简称MLP)，由三部分组成：一组感知单元组成输入层；一层或多层计算节点的隐藏层；一层计算节点的输出层。多层感知器的表示：输入节点数-第1隐层节点数-第⒉隐层节点数-…-输出节点数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627154520676.png" srcset="/img/loading.gif" lazyload alt="image-20230627154520676"></p>
+<p>当使用阈值函数作为神经元输出函数时，任何逻辑函数都可以使用一个三层的前馈网络实现。当神经元的输出函数为Sigmoid函数时,上述结论可以推广到连续的非线性函数。在很宽松的条件下，三层前馈网络可以逼近任意的多元非线性函数，突破了二层前馈网络线性可分的限制。</p>
+<p>要使神经元合理的组合输出，需要先让其学习以模拟生物的学习过程。神经元的学习算法通常采用Hebb学习规则，如果神经元$u_i$接收来自另一神经元$u_j$的输出，则当这两个神经元同时兴奋时，从$u_j$到$u_i$;的权值$w_{ij}$就得到加强。具体到前述的神经元模型，可以将Hebb规则表现为如下的算法$\Delta w_i&#x3D;\eta yx_i$。式中$\Delta w_i$是对第$i$个权值的修正量，$\eta$是控制学习速度的系数。太大会影响训练的稳定性，太小则使训练的收敛速度变慢，一般取$0&lt;\eta≤1$，人工神经网络首先要以一定的学习准则进行学习，然后才能工作。</p>
+<h3 id="3-BP算法"><a href="#3-BP算法" class="headerlink" title="3. BP算法"></a>3. BP算法</h3><p>三层前馈网络的适用范围大大超过二层前馈网络，但学习算法较为复杂，主要困难是中间的隐藏层不直接与外界连接，无法直接计算其误差。而BP算法可解决这一问题。其<strong>主要思想是从后向前(反向)逐层传播输出层的误差，以间接算出隐藏层误差。</strong>因此算法分为两个阶段:</p>
+<ul>
+<li>第一阶段(正向传导过程)：输入信息从输入层经隐藏层逐层计算各单元的输出值;</li>
+<li>第二阶段(反向传播过程)：输出误差逐层向前算出隐藏层各单元的误差，并用此误差修正前层权值。</li>
 </ul>
+<p>在反向传播算法中通常采用梯度法修正权值，为此要求输出函数可微，通常采用Sigmoid函数作为输出函数。下面考虑一个三层前馈网络，其中$i$表示前层第$i$个单元，$k$表示后层第$k$个单元，$O_j$表示本层的输出，$w_{ij}$表示前层到本层的权值，$w_{jk}$表示本层到后层的权值。其中的输出函数选择Sigmoid函数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626165418477.png" srcset="/img/loading.gif" lazyload alt="image-20230626165418477"></p>
+<p>第一阶段的正向传导过程中，第$j$层的输入如此按公式所述，第一阶段从输入层逐层往后计算输出，直到最后一层。<br>$$<br>net_j&#x3D;\sum_{i&#x3D;0}^nw_{ij}O_i<br>$$</p>
+<p>$$<br>O_j&#x3D;f(net_j)&#x3D;\frac{1}{1+e^{-net_j}}<br>$$</p>
+<p>第二阶段的反向传播过程中，对于输出层，$O_k$是实际输出，与理想输出$y_k$的均方误差可以通过以下公式计算。<br>$$<br>E&#x3D;\frac{1}{2}\sum_k(y_k-O_k)^2<br>$$<br>输出层的局部梯度为：<br>$$<br>\delta_j&#x3D;\frac{\partial E}{\partial \ net_j}&#x3D;\frac{\partial E}{\partial \  out_j}\frac{\partial\ out_j}{\partial \ net_j  }&#x3D;-(y_j-O_j)O_j(1-O_j)<br>$$<br>因此计算权值对误差的影响如下公式所示<br>$$<br>\frac{\partial E}{\partial \  w_{ij}}&#x3D;\frac{\partial E}{\partial \ net_j}\frac{\partial \ net_j}{\partial \ w_{ij}}&#x3D;\delta_jO_j<br>$$<br>采用负梯度修正权值，<br>$$<br>w&#x3D;w-\delta ·O<br>$$<br>BP算法易形成局部极小而得不到全局最优，训练次数多使得学习效率低，存在收敛速度慢等问题。</p>
+<p>传统的BP算法改进主要有两类：</p>
+<ul>
+<li>启发式算法：如附加动量法，自适应算法。</li>
+<li>数值优化算法：如共轭梯度法、牛顿迭代法等。</li>
+</ul>
+<p><strong>算法流程：</strong></p>
+<p><u>对每个训练样例,</u>，BP算法执行以下操作：先将输入示例提供给输入层神经元，然后逐层将信号前传，直到产生输出层的结果；然后计算输出层的误差(第4-5行)，再将误差逆向传播至隐层神经元(第6行)，最后根据隐层神经元的误差来对连接权和阈值进行调整(第7行)。该迭代过程循环进行，直到达到某些停止条件为止，例如训练误差已达到一个很小的值。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230626224501429.png" srcset="/img/loading.gif" lazyload alt="image-20230626224501429"></p>
+<p>但我们上面介绍的“标准BP算法”<strong>每次仅针对一个训练样例更新连接权和阈值</strong>，也就是说，图中算法的更新规则是基于单个的$E_k$推导而得。如果类似地推导出基于累积误差最小化的更新规则，就得到了<strong>累积误差逆传播(accumulated error backpropagation)算法</strong>。累积BP算法与标准BP算法都很常用。一般来说,标准BP算法每次更新只针对单个样例，参数更新得非常频繁，而且对不同样例进行更新的效果可能出现“抵消”现象。因此，为了达到同样的累积误差极小点，标准BP算法往往需进行更多次数的迭代。<strong>累积BP算法直接针对累积误差最小化，<u>它在读取整个训练集D一遍后才对参数进行更新</u>，其参数更新的频率低得多。</strong>但在很多任务中,累积误差下降到一定程度之后,进一步下降会非常缓慢，这时标准BP往往会更快获得较好的解，尤其是在训练集D非常大时更明显。 </p>
 
             </div>
             <hr>
@@ -312,9 +312,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/28/DID-EverID/">
+                      <a href="/2023/06/27/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">EverID</span>
+                        <span class="hidden-mobile">演化算法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -322,8 +322,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/15/PicGo-github-%E5%9B%BE%E5%BA%8A/">
-                        <span class="hidden-mobile">PicGo+github+typora 图床</span>
+                      <a href="/2023/06/06/c%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0/">
+                        <span class="hidden-mobile">c回炉重造</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

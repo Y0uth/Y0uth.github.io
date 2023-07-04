@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="遗传算法（Genetic Algorithm，GA）最早是由美国的 John holland于20世纪70年代提出,该算法是根据大自然中生物体进化规律而设计提出的。是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="遗传算法（Genetic Algorithm，GA）最早是由美国的 John holland于20世纪70年代提出,该算法是根据大自然中生物体进化规律而设计提出的。是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="演化算法">
+<meta property="og:url" content="http://yankel.github.com/2023/06/27/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="遗传算法（Genetic Algorithm，GA）最早是由美国的 John holland于20世纪70年代提出,该算法是根据大自然中生物体进化规律而设计提出的。是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627212322571.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230704110237331.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627214207483.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627214300498.png">
+<meta property="article:published_time" content="2023-06-27T08:32:59.000Z">
+<meta property="article:modified_time" content="2023-07-04T03:03:05.780Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627212322571.png">
+  
+  <title>演化算法 - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="演化算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-06-27 16:32" pubdate>
+        2023年6月27日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">演化算法</h1>
+            
+            <div class="markdown-body">
+              <p>遗传算法（Genetic Algorithm，GA）最早是由美国的 John holland于20世纪70年代提出,该算法是根据大自然中生物体进化规律而设计提出的。是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法。</p>
+<span id="more"></span>
+
+<h3 id="1-遗传算法概述"><a href="#1-遗传算法概述" class="headerlink" title="1. 遗传算法概述"></a>1. 遗传算法概述</h3><p>遗传算法由John H.Holland教授提出，为一种全局优化算法。它模拟自然进化与遗传理论，通过将优化问题进行转移，从而成功避免了一般优化算法中需要过多考虑的动力学信息问题，在原理上突破了常规的优化算法框架，算法结构较简单、处理信息能力较强，具有很好的鲁棒性。遗传算法最大的特点就是将优化问题中的参数转换成了编码的个体，从而不需要管理优化问题中的参数问题，只需要处理进行了编码的个体，而这些个体在遗传算法优化过程中所描述的就是生物界中“物竞天择，适者生存”的生存抉择概念。正是由于遗传算法具有上述等特点，现在被广泛用于各大领域，比如在一些优化问题复杂多样以及非线性等问题上，是21世纪以来智能算法中的比较突出的技术之一。</p>
+<p><strong>核心思想：</strong></p>
+<ul>
+<li>遗传算法是模拟达尔文生物进化论的自然选择和遗传学机理的生物进化过程的计算模型，是一种通过模拟自然进化过程搜索最优解的方法</li>
+<li>遗传算法起源于对生物系统所进行的计算机模拟研究。模仿自然界生物进化机制发展起来的随机全局搜索和优化方法，借鉴了达尔文的进化论和孟德尔的遗传学说。其本质是一种高效、并行、全局搜索的方法，能在搜索过程中自动获取和积累有关搜索空间的知识，并自适应地控制搜索过程以求得最佳解</li>
+<li>遗传算法遵循自然界<code>适者生存、优胜劣汰</code>的原则，是一类借鉴生物界自然选择和自然遗传机制的随机化搜索算法</li>
+</ul>
+<p>达尔文进化论的主要观点是：物竞天择，适者生存。遗传算法的基本思想就是模仿自然进化过程，通过对群体中具有某种结构形式的个体进行遗传操作，从而生成新的群体，逐渐逼近最优解。在求解过程中设定一个固定规模的种群，种群中的每个个体都表示问题的一个可能解，个体适应环境的程度用适应度函数判断，适应度差的个体被淘汰，适应度好的个体得以继续繁衍，繁衍的过程中可能要经过选择、交叉、变异，形成新的族群，如此往复得到更多更好的解。</p>
+<h3 id="2-遗传算法基本概念"><a href="#2-遗传算法基本概念" class="headerlink" title="2. 遗传算法基本概念"></a>2. 遗传算法基本概念</h3><ol>
+<li>基因（Gene）：是生物界中表现生物体性状特征的一种遗传因子。在遗传算法中，基因的表示方法常常采用二进制（1 0）、整数或者某种字符来进行表达。</li>
+<li>染色体（Chromosome）：是生物界中的生物体表现遗传类特征的一种物质，也就是说它是基因存储的一种载体。</li>
+<li>个体（Individual）：个体所表现出来的是生物体带有特征的实体。在遗传算法进行遗传优化的过程中所优化的基本对象就是个体。</li>
+<li>种群（Population）：个体的集合称为种群。</li>
+<li>群体规模（Population Size）：群体规模表示的是整个种群中所有的个体数量总和。</li>
+<li>适应度（Fitness）：是个体优良的参考值。</li>
+<li>编码（Coding)：DNA中的遗传信息是按某种方式陈列在一个长链上。在遗传算法中，这实际上是一个映射过程，即先验参数到遗传参数的映射。</li>
+<li>选择（Selection)：描述的是“物竞天择，适者生存”的概念。在遗传算法中，参考个体适应值进行选择的过程。</li>
+<li>复制（Reproduction）：即DNA复制。在遗传算法中，对个体进行选择时，往往会根据群体规模来进行优良个体的复制。</li>
+<li>交叉（Crossover）：即杂交，是两个同源染色体在配对时，相互交换基因的过程。在遗传算法中，表示的是两个随机选择的个体进行信息互换的过程。</li>
+<li>变异（Mutation）：细胞在进行复制的时候，会出现很小的概率的差错，使得子染色体与母染色体不同，即发生变异。在遗传算法中，随机性的对个体中的信息进行改变的过程。</li>
+</ol>
+<h3 id="3-算法流程"><a href="#3-算法流程" class="headerlink" title="3. 算法流程"></a>3. 算法流程</h3><p>基本遗传算法(也称标准遗传算法或简单遗传算法，Simple Genetic Algorithm，简称SGA)是一种群体型操作，该操作以群体中的所有个体为对象，只使用基本遗传算子(Genetic Operator)：<strong>选择算子(Selection Operator)<strong>、</strong>交叉算子(Crossover Operator)<strong>和</strong>变异算子(Mutation Operator)<strong>，其遗传进化操作过程简单，容易理解，是其它一些遗传算法的基础，它不仅给各种遗传算法提供了一个基本框架，同时也具有一定的应用价值。</strong>选择</strong>、<strong>交叉</strong>和<strong>变异</strong>是遗传算法的3个主要操作算子，它们构成了遗传操作，使遗传算法具有了其它方法没有的特点。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627212322571.png" srcset="/img/loading.gif" lazyload alt="image-20230627212322571"></p>
+<p><strong>1） 编码和产生初始群体</strong></p>
+<p>根据优化函数的实际问题，选择好相应的编码方法，根据种群规模的需要，随机产生确定长度的n个染色体，作为初始种群。<br>$$<br>pop_i(t),i&#x3D;1,2,3,…,n<br>$$<br><strong>2）计算适应度值</strong></p>
+<p>假设适应度函数为$f(i)$，则对所有的个体计算其相对应的值为：<br>$$<br>f(i)&#x3D;f(pop_i(t))<br>$$<br><strong>3）终止判断</strong></p>
+<p>根据设定的终止条件判断是否达到收敛状态以选择下一步操作。</p>
+<p><strong>4）选择运算</strong></p>
+<p>选择适应度值大的个体进行交叉运算，则每个个体的选择概率为<br>$$<br>P_i&#x3D;\frac{f(i)}{\sum_{i&#x3D;1}^n  f(i)},i&#x3D;1,2,…,n<br>$$<br>以选择概率$P_i$作为新的概率分布，从当前种群中选择个体重组新的个体种群：<br>$$<br>newpop(t+1)&#x3D;{pop_j(t)|j&#x3D;1,2,3,…,n}<br>$$<br><strong>5）交叉运算</strong></p>
+<p>随机从种群中选择两个不同的个体，以概率$P_c$进行交换基因，得到新的两个个体，进行<em>n</em>&#x2F;2次，得到一个新的种群$crosspop(t+1)$。</p>
+<p><strong>6）变异运算</strong></p>
+<p>从种群中随机选择个体，以变异概率$P_m$进行染色体变异，得到新的种群$mutpop(t+1)$,这个群体作为完成一次遗传操作的子种群，即$pop(t)&#x3D;mutpop(t+1)$,此时传到第 2）步。</p>
+<h3 id="4-实验实现GA算法"><a href="#4-实验实现GA算法" class="headerlink" title="4. 实验实现GA算法"></a>4. 实验实现GA算法</h3><p>实验环境：windows 10、python 3.7、pycharm 2018</p>
+<p><strong>使用算法求解函数$f(x)&#x3D;\sum_{i&#x3D;1}^{29}[100(x_{i+1}-x_i^2)^2+(x_i-1)^2] ,-30 \le x_i \le30 \$  和函数$f(x)&#x3D;-\sum_{i&#x3D;1}^{30}(x_isin(\sqrt{\lvert{x_i}\lvert})),-500\le x_i \le 500$的最小值</strong></p>
+<p><strong>算法实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-comment"># 定义函数 f1(x)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f1</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(<span class="hljs-number">100</span> * (x[i+<span class="hljs-number">1</span>] - x[i]**<span class="hljs-number">2</span>)**<span class="hljs-number">2</span> + (x[i] - <span class="hljs-number">1</span>)**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">29</span>))<br><br><span class="hljs-comment"># 定义函数 f2(x)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f2</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> -<span class="hljs-built_in">sum</span>(x[i] * np.sin(np.sqrt(<span class="hljs-built_in">abs</span>(x[i]))) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">30</span>))<br><br><span class="hljs-comment"># 生成一个个体</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_individual</span>(<span class="hljs-params">problem, bounds</span>):<br>    <span class="hljs-keyword">if</span> problem == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 如果是问题1</span><br>        <span class="hljs-keyword">return</span> [random.uniform(-<span class="hljs-number">30</span>, <span class="hljs-number">30</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">30</span>)]  <span class="hljs-comment"># 则每个元素在(-30, 30)之间随机取值</span><br>    <span class="hljs-keyword">elif</span> problem == <span class="hljs-number">2</span>:  <span class="hljs-comment"># 如果是问题2</span><br>        <span class="hljs-keyword">return</span> [random.uniform(-<span class="hljs-number">500</span>, <span class="hljs-number">500</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">30</span>)]  <span class="hljs-comment"># 则每个元素在(-500, 500)之间随机取值</span><br><br><span class="hljs-comment"># 计算个体的适应度值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fitness</span>(<span class="hljs-params">individual, problem</span>):<br>    <span class="hljs-keyword">if</span> problem == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 如果是问题1</span><br>        <span class="hljs-keyword">return</span> f1(individual)  <span class="hljs-comment"># 则计算函数f1的值</span><br>    <span class="hljs-keyword">elif</span> problem == <span class="hljs-number">2</span>:  <span class="hljs-comment"># 如果是问题2</span><br>        <span class="hljs-keyword">return</span> f2(individual)  <span class="hljs-comment"># 则计算函数f2的值</span><br><br><span class="hljs-comment"># 选择父代个体</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">selection</span>(<span class="hljs-params">population, fitness_values</span>):<br>    parents = []<br>    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>):  <span class="hljs-comment"># 选择2个父代个体</span><br>        tournament_indices = [random.randint(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(population) - <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>)]  <span class="hljs-comment"># 随机选择5个个体</span><br>        best_index = <span class="hljs-built_in">min</span>(tournament_indices, key=<span class="hljs-keyword">lambda</span> i: fitness_values[i])  <span class="hljs-comment"># 选出适应度值最小的个体</span><br>        parents.append(population[best_index])  <span class="hljs-comment"># 将最佳个体加入父代列表中</span><br>    <span class="hljs-keyword">return</span> parents<br><br><span class="hljs-comment"># 交叉操作</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">crossover</span>(<span class="hljs-params">parents</span>):<br>    crossover_point = random.randint(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(parents[<span class="hljs-number">0</span>]) - <span class="hljs-number">1</span>)  <span class="hljs-comment"># 随机选择交叉点</span><br>    child1 = parents[<span class="hljs-number">0</span>][:crossover_point] + parents[<span class="hljs-number">1</span>][crossover_point:]  <span class="hljs-comment"># 生成子代1</span><br>    child2 = parents[<span class="hljs-number">1</span>][:crossover_point] + parents[<span class="hljs-number">0</span>][crossover_point:]  <span class="hljs-comment"># 生成子代2</span><br>    <span class="hljs-keyword">return</span> child1, child2<br><br><span class="hljs-comment"># 变异操作</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">mutation</span>(<span class="hljs-params">individual, bounds, mutation_rate</span>):<br>    mutated = individual.copy()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(mutated)):<br>        <span class="hljs-keyword">if</span> random.random() &lt; mutation_rate:  <span class="hljs-comment"># 以mutation_rate的概率进行变异</span><br>            mutated[i] = random.uniform(bounds[i][<span class="hljs-number">0</span>], bounds[i][<span class="hljs-number">1</span>])  <span class="hljs-comment"># 在元素的取值范围内随机取值</span><br>    <span class="hljs-keyword">return</span> mutated<br><br><span class="hljs-comment"># 遗传算法</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">genetic_algorithm</span>(<span class="hljs-params">problem, bounds, pop_size=<span class="hljs-number">800</span>, generations=<span class="hljs-number">1000</span>, mutation_rate=<span class="hljs-number">0.01</span></span>):<br>    population = [generate_individual(problem, bounds) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(pop_size)]  <span class="hljs-comment"># 生成初始种群</span><br>    best_fitnesses = []<br><br>    <span class="hljs-keyword">for</span> generation <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(generations):  <span class="hljs-comment"># 进行generations代的迭代</span><br>        fitness_values = [fitness(ind, problem) <span class="hljs-keyword">for</span> ind <span class="hljs-keyword">in</span> population]  <span class="hljs-comment"># 计算种群中每个个体的适应度值</span><br>        new_population = []<br><br>        <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(new_population) &lt; pop_size:  <span class="hljs-comment"># 生成新的种群，直到种群数量达到pop_size</span><br>            parents = selection(population, fitness_values)  <span class="hljs-comment"># 选择父代个体</span><br>            child1, child2 = crossover(parents)  <span class="hljs-comment"># 交叉操作生成2个子代</span><br>            child1 = mutation(child1, bounds, mutation_rate)  <span class="hljs-comment"># 对子代1进行变异</span><br>            child2 = mutation(child2, bounds, mutation_rate)  <span class="hljs-comment"># 对子代2进行变异</span><br>            new_population.extend([child1, child2])  <span class="hljs-comment"># 将2个子代加入新的种群中</span><br><br>        population = new_population  <span class="hljs-comment"># 更新种群</span><br><br>        best_fitness = <span class="hljs-built_in">min</span>(fitness_values)  <span class="hljs-comment"># 当前最佳适应度值</span><br>        best_fitnesses.append(best_fitness)  <span class="hljs-comment"># 将当前最佳适应度值加入列表中</span><br><br>    best_individual = <span class="hljs-built_in">min</span>(population, key=<span class="hljs-keyword">lambda</span> ind: fitness(ind, problem))  <span class="hljs-comment"># 选出适应度值最小的个体作为最佳个体</span><br><br>    <span class="hljs-comment"># 绘制适应度值随迭代次数变化的曲线</span><br>    plt.plot(<span class="hljs-built_in">range</span>(generations), best_fitnesses)<br>    plt.xlabel(<span class="hljs-string">&quot;Generation&quot;</span>)<br>    plt.ylabel(<span class="hljs-string">&quot;Fitness&quot;</span>)<br>    plt.title(<span class="hljs-string">f&quot;Problem <span class="hljs-subst">&#123;problem&#125;</span>&quot;</span>)<br>    plt.show()<br><br>    <span class="hljs-keyword">return</span> fitness(best_individual, problem), best_individual<br><br>bounds1 = [(-<span class="hljs-number">30</span>, <span class="hljs-number">30</span>)] * <span class="hljs-number">30</span>  <span class="hljs-comment"># 问题1中每个元素的取值范围</span><br>bounds2 = [(-<span class="hljs-number">500</span>, <span class="hljs-number">500</span>)] * <span class="hljs-number">30</span>  <span class="hljs-comment"># 问题2中每个元素的取值范围</span><br><br>min_f1, best_individual1 = genetic_algorithm(<span class="hljs-number">1</span>, bounds1)  <span class="hljs-comment"># 求解问题1的全局最小值</span><br>min_f2, best_individual2 = genetic_algorithm(<span class="hljs-number">2</span>, bounds2)  <span class="hljs-comment"># 求解问题2的全局最小值</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Minimum value of f1(x):&quot;</span>, min_f1)  <span class="hljs-comment"># 输出问题1的全局最小值</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Best individual for f1(x):&quot;</span>, best_individual1)  <span class="hljs-comment"># 输出问题1的最佳个体</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Minimum value of f2(x):&quot;</span>, min_f2)  <span class="hljs-comment"># 输出问题2的全局最小值</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Best individual for f2(x):&quot;</span>, best_individual2)  <span class="hljs-comment"># 输出问题2的最佳个体</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>实验结果：</strong></p>
+<p>与函数真实的全局最小值很接近：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230704110237331.png" srcset="/img/loading.gif" lazyload alt="image-20230704110237331"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627214207483.png" srcset="/img/loading.gif" lazyload alt="image-20230627214207483"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yank3l/ImageHosting/Yank3l-PIC/image-20230627214300498.png" srcset="/img/loading.gif" lazyload alt="image-20230627214300498"></p>
+<h3 id="5-遗传算法的优缺点"><a href="#5-遗传算法的优缺点" class="headerlink" title="5. 遗传算法的优缺点"></a>5. 遗传算法的优缺点</h3><p><strong>遗传算法的优点</strong></p>
+<ul>
+<li>如果处理得当，可以在优化问题中得到全局最优解</li>
+<li>比较容易实现并行化计算</li>
+<li>遗传算法以结果为导向，最关注的两个点，一是编码与解码，一是适应度函数。它需要的背景知识少，也不需要太关注过程。所以应用范围非常广，可以解决非线性、不连续的问题，甚至有些无法清晰知道过程的问题，也可以解决</li>
+</ul>
+<p><strong>遗传算法的缺点</strong></p>
+<ul>
+<li>遗传算法非常依赖适应度函数，可以说适应度函数直接确定了结果的走向，而这个函数需要使用者自行提供，而且还没有标准，需根据实现问题总结出来</li>
+<li>群体大小选择不当，或者选择压设置不对，都可能会过早收敛，错过全局最优解，只能达到局部最优解</li>
+<li>因为遗传算法并不太关注过程，所以计算过程中的参数稍有不同可能会得到不同结果。这些参数包括群体大小、交换频率、突变频率等</li>
+<li>当染色体过长(即基因数过多)时，需要重组的片段更多，导致群体规模非常大，使计算时间急剧增加</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Machine-Learning/">Machine Learning</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Machine-Learning/">Machine Learning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/26/BP%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">BP算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
