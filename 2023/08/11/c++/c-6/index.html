@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="c++ primer plus 第八章，包括引用变量&amp;amp;、默认参数、函数重载、函数模板。">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="c++ primer plus 第八章，包括引用变量&amp;、默认参数、函数重载、函数模板。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++基础知识(6)">
+<meta property="og:url" content="http://yankel.github.com/2023/08/11/c++/c-6/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="c++ primer plus 第八章，包括引用变量&amp;、默认参数、函数重载、函数模板。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-11T03:52:54.000Z">
+<meta property="article:modified_time" content="2023-08-11T03:54:57.260Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>c++基础知识(6) - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="c++基础知识(6)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-11 11:52" pubdate>
+        2023年8月11日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">c++基础知识(6)</h1>
+            
+            <div class="markdown-body">
+              <p>c++ primer plus 第八章，包括引用变量&amp;、默认参数、函数重载、函数模板。</p>
+<span id="more"></span>
+
+<h3 id="c-内联函数"><a href="#c-内联函数" class="headerlink" title="c++内联函数"></a>c++内联函数</h3><p>内联函数是c++为提高程序运行速度所做的一项改进。常规函数和内联函数的主要区别不在于编写方式，而<strong>在于c++编译器如何将它们组合到程序中。</strong></p>
+<p>编译过程的最终产品是可执行程序——由–组机器语言指令组成。运行程序时，操作系统将这些指令载入到计算机内存中，因此每条指令都有特定的内存地址。计算机随后将逐步执行这些指令。有时(如有循环或分支语句时)，将跳过–些指令,向前或向后跳到特定地址。<strong>常规函数调用也使程序跳到另一个地址;(函数的地址),并在函数结束时返回。</strong>来回跳跃并记录跳跃位置意味着以前使用函数时，需要一定的开销。</p>
+<p>内联函数的编译代码与其他程序代码“内联”起来了。即编译器将使用相应的函数代码替代函数调用。对于内联代码，程序无需跳到另一个位置处执行代码，再跳回来。因此内联函数的运行速度比常规函数更快，但代价是需要占用更多内存。</p>
+<blockquote>
+<p>常规函数：跳转；内联函数：复制</p>
+<p>代码执行时间&gt;函数调用时间–&gt;使用常规函数</p>
+<p>代码执行时间&lt;函数调用时间–&gt;使用内联函数</p>
+</blockquote>
+<p>要使用内联函数，必须采用以下措施之一</p>
+<ul>
+<li>在函数声明前加上关键字<code>inline</code></li>
+<li>在函数定义前加上关键字<code>inline</code></li>
+</ul>
+<blockquote>
+<p>内联函数也是按值传递</p>
+</blockquote>
+<h3 id="引用变量"><a href="#引用变量" class="headerlink" title="引用变量"></a>引用变量</h3><p>引用是已定义的变量的别名（另一个名称）（外号）</p>
+<p>主要用途是用作函数的形参。通过<strong>将引用变量用作参数，函数将使用原始数据</strong>，而不是其副本。</p>
+<blockquote>
+<p>除了指针以外，引用也为函数处理大型结构提供了一种非常方便的途径。</p>
+</blockquote>
+<h4 id="创建引用变量"><a href="#创建引用变量" class="headerlink" title="创建引用变量"></a>创建引用变量</h4><p>使用&amp;符号来声明引用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> rats;<br><span class="hljs-type">int</span> &amp; rodents = rats;<br><span class="hljs-comment">// 引用声明允许将rats和rodents互换-它们指向相同的值和内存单元</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>必须在声明引用时进行初始化</strong>，一旦与某个变量关联起来，就将一直效忠于它。</p>
+<h4 id="将引用用作函数参数"><a href="#将引用用作函数参数" class="headerlink" title="将引用用作函数参数"></a>将引用用作函数参数</h4><p>引用经常被用作函数参数，使得函数中的变量名成为调用程序中的变量的别名。这种传递参数的方法称为按引用传递。按引用传递允许被调用的函数能够方位调用函数中的变量。（操作形参&#x3D;操作实参）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// swapping with references</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swapr</span><span class="hljs-params">(<span class="hljs-type">int</span> &amp; a, <span class="hljs-type">int</span> &amp; b)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span>  <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>	<span class="hljs-type">int</span> wallet1 = <span class="hljs-number">300</span>;<br>	<span class="hljs-type">int</span> wallet2 = <span class="hljs-number">350</span>;<br> 	cout &lt;&lt; <span class="hljs-string">&quot;wallet1 = $&quot;</span> &lt;&lt; wallet1 &lt;&lt; endl;<br> 	cout &lt;&lt; <span class="hljs-string">&quot;wallet2 = $&quot;</span> &lt;&lt; wallet2 &lt;&lt; endl;  <br>    <span class="hljs-built_in">swapr</span>(wallet1, wallet2);<br> 	cout &lt;&lt; <span class="hljs-string">&quot;wallet1 = $&quot;</span> &lt;&lt; wallet1 &lt;&lt; endl;<br> 	cout &lt;&lt; <span class="hljs-string">&quot;wallet2 = $&quot;</span> &lt;&lt; wallet2 &lt;&lt; endl;     <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swapr</span><span class="hljs-params">(<span class="hljs-type">int</span> &amp; a, <span class="hljs-type">int</span> &amp; b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> temp;<br>    temp = a;<br>    a = b;<br>    b = temp;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="引用的属性和特别之处"><a href="#引用的属性和特别之处" class="headerlink" title="引用的属性和特别之处"></a>引用的属性和特别之处</h4><p>如果想要让函数使用传递给它的信息，而不对这些信息进行修改，同时又想使用引用，则应使用常量引用（通过const从而无法修改引用的值）</p>
+<p>例如<code> double refcube (const double &amp;ra)</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">cube</span> <span class="hljs-params">(<span class="hljs-type">double</span> a)</span></span>;<br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">refcube</span><span class="hljs-params">(<span class="hljs-type">double</span> &amp;ra)</span></span>;<br><br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">cube</span><span class="hljs-params">(<span class="hljs-type">double</span> a)</span></span><br><span class="hljs-function"></span>&#123;<br>    a *= a * a;<br>    <span class="hljs-keyword">return</span> a;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">refcube</span><span class="hljs-params">(<span class="hljs-type">double</span> &amp;ra)</span></span><br><span class="hljs-function"></span>&#123;<br>    ra *= ra * ra;<br>    <span class="hljs-keyword">return</span> ra;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于按值传递的函数，例如上述代码中的<code>cube</code>函数，可使用多种类型的实参，例如以下调用都是合法的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">double</span> z = <span class="hljs-built_in">cube</span>(x + <span class="hljs-number">2.0</span>);<br>z = <span class="hljs-built_in">cube</span>(<span class="hljs-number">8.0</span>);<br><span class="hljs-built_in">cube</span>(x + <span class="hljs-number">3.0</span>);<br></code></pre></td></tr></table></figure>
+
+<p>但是将上述类似的参数传递给接收引用参数的函数，会发现出错，这是因为传递引用的限制更严格，</p>
+<p><strong>–&gt;临时变量、引用参数和const</strong></p>
+<p>当参数为const引用时，如果实参与引用参数不匹配，c++将生成临时变量</p>
+<p>将引用参数声明为常量数据的引用的理由有</p>
+<ul>
+<li>使用const可以避免无意中修改数据的编程错误</li>
+<li>使用const使函数能够处理const和非const实参，否则将只能接受非const数据</li>
+<li>使用const引用使函数能够正确生成并使用临时变量</li>
+</ul>
+<h4 id="将引用用于结构体"><a href="#将引用用于结构体" class="headerlink" title="将引用用于结构体"></a>将引用用于结构体</h4><p>假设有如下结构体定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">free_throws</span><br>&#123;<br>    string name;<br>    <span class="hljs-type">int</span> made;<br>    <span class="hljs-type">int</span> attempts;<br>    <span class="hljs-type">float</span> percent;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">set_pc</span> <span class="hljs-params">(free_throws &amp;ft)</span></span><br></code></pre></td></tr></table></figure>
+
+<p>为什么要返回引用？不需要将值复制到临时变量，效率更高</p>
+<p>返回引用时，应避免返回函数终止时不再存在的内存单元引用（函数局部变量的引用）</p>
+<h4 id="何时使用引用参数"><a href="#何时使用引用参数" class="headerlink" title="何时使用引用参数"></a>何时使用引用参数</h4><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>默认参数指的是当函数调用中省略了实参时自动使用的一个值</p>
+<p>必须通过函数原型来设置默认值，由于编译器通过查看函数原型来了解函数所使用的参数数目，因此函数原型也必须将可能得默认参数告知程序。方法是将值赋给原型中的参数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//例如如下函数原型</span><br><span class="hljs-function"><span class="hljs-type">char</span> * <span class="hljs-title">left</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> * str, <span class="hljs-type">int</span> n = <span class="hljs-number">1</span>)</span></span>;<br><span class="hljs-comment">//在函数定义时 不填写默认值</span><br><span class="hljs-function"><span class="hljs-type">char</span> * <span class="hljs-title">left</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> * str, <span class="hljs-type">int</span> n )</span></span><br><span class="hljs-function"></span>&#123;<br>    body<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于多个参数的函数，必须从右向左添加默认值。也就是说，要为某个参数设置默认值，则必须为它右边的所有参数提供默认值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">harpo</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m = <span class="hljs-number">4</span>, <span class="hljs-type">int</span> j = <span class="hljs-number">5</span>)</span></span>; <span class="hljs-comment">//valid</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">chico</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m = <span class="hljs-number">6</span>, <span class="hljs-type">int</span> j)</span></span>; <span class="hljs-comment">//invalid</span><br><br>beeps = <span class="hljs-built_in">harpo</span>(<span class="hljs-number">2</span>);<br>beeps = <span class="hljs-built_in">harpo</span>(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>);<br>beeps = <span class="hljs-built_in">harpo</span>(<span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">5</span>);<br></code></pre></td></tr></table></figure>
+
+<p>实参按从左到右的顺序依次被赋给相应的形参，而不能跳过任何参数，例如下面的调用是不允许的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">beeps = <span class="hljs-built_in">harpo</span>(<span class="hljs-number">1</span>, , <span class="hljs-number">8</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h3><p>函数多态（函数重载）指的是<strong>可以有多个同名的函数</strong>。可以通过函数重载来设计一系列函数，这些函数完成相似的工作，但是<strong>使用不同的参数列表</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *str, <span class="hljs-type">int</span> width)</span></span>;<span class="hljs-comment">// #1</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-type">double</span> d, <span class="hljs-type">int</span> width)</span></span>;<span class="hljs-comment">// #2</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-type">long</span> l, <span class="hljs-type">int</span> width)</span></span>;<span class="hljs-comment">// #3</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> width)</span></span>;<span class="hljs-comment">// #4</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *str)</span></span>;<span class="hljs-comment">// #5</span><br><span class="hljs-comment">//使用pritf()函数时，编译器将根据所采取的用法使用有相同参数列表的原型</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;pancakes&quot;</span>, <span class="hljs-number">14</span>);<span class="hljs-comment">// use #1</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Syrup&quot;</span>);<span class="hljs-comment">// #2</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-number">1999.0</span>, <span class="hljs-number">10</span>);<span class="hljs-comment">// #3</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-number">1999</span>, <span class="hljs-number">12</span>);<span class="hljs-comment">// #4</span><br><span class="hljs-built_in">printf</span>(<span class="hljs-number">1999L</span>, <span class="hljs-number">15</span>)<span class="hljs-comment">// #5</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>仅当函数基本上执行相同的任务，但使用不同的数据时，才应采用函数重载。</p>
+<h3 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h3><p><strong>需要对多个不同类型的数据使用同一种算法时，可以使用模板。</strong></p>
+<p>函数模板是通用的函数描述，也就是说，它们可以使用泛型来定义函数，其中的泛型可用具体的类型（如int或double替换）。</p>
+<blockquote>
+<p>例如已经定义了一个交换两个int值的函数，假设现在要交换两个double值，那么一种方法是复制原来的代码，用double替换所有的int。如果需要交换两个char值，可以再次使用同样的技术。然而进行这种修改会浪费时间且容易出错。</p>
+<p>c++的函数模板能够自动完成这一功能，可以节省时间，而且更可靠</p>
+</blockquote>
+<p>定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> AnyType&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function</span><span class="hljs-params">(AnyType a)</span></span><br><span class="hljs-function"></span>&#123;<br>    body<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>例如，以下是一个交换函数模板</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//函数原型</span><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span>  T&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(T &amp;a, T &amp;b)</span></span><br><span class="hljs-function"><span class="hljs-comment">//函数定义</span></span><br><span class="hljs-function"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span>  T&gt;</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(T &amp;a, T &amp;b)</span></span><br><span class="hljs-function"></span>&#123;<br>	T temp;<br>	temp = a;<br>	a = b;<br>	b = temp;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>模板并不创建任何函数，而只是告诉编译器如何定义函数。需要交换int的函数时，编译器将按模板创建这样的函数，并用int代替AnyType。同样，需要交换double的函数时，编译器将按模板创建这样的函数，并用double代替AnyType。</p>
+</blockquote>
+<h4 id="模板的局限性"><a href="#模板的局限性" class="headerlink" title="模板的局限性"></a>模板的局限性</h4><p>假设有如下模板</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">f</span><span class="hljs-params">(T a, T b)</span></span><br><span class="hljs-function"></span>&#123;<br>...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>假设<code>function f</code>中定义了复制<code>a = b</code>，但是如果<code>a</code>和<code>b</code>是数组，那么这种运算将不成立</p>
+<p>在使用函数模板时，编写的函数模板可能无法处理某些类型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 假设定义如下结构体</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">job</span><br>&#123;<br>    <span class="hljs-type">char</span> name[<span class="hljs-number">40</span>];<br>    <span class="hljs-type">double</span> salary;<br>    <span class="hljs-type">int</span> floor;<br>&#125;<br><span class="hljs-comment">// 希望使用函数模板交换两个这种结构的内容</span><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span>  T&gt;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(T &amp;a, T &amp;b)</span></span><br><span class="hljs-function"></span>&#123;<br>	T temp;<br>	temp = a;<br>	a = b;<br>	b = temp;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>假设只想交换<code>salary</code>和<code>floor</code>成员，而不交换<code>name</code>成员，则无法通过模板重载来提供其他的代码。</p>
+<p>然而，可以提供一个具体化函数定义——称为<code>显式具体化</code>其中包含所需的代码。当编译器找到与函数调用匹配的具体化定义时，将使用该定义，而不再寻找模板。</p>
+<h4 id="显式具体化"><a href="#显式具体化" class="headerlink" title="显式具体化"></a>显式具体化</h4><ul>
+<li>对于给定的函数名，可以有非模板函数、模板函数和显示具体化模板函数以及他们的重载版本</li>
+<li>显式具体化的原型和定义应以<code>template&lt;&gt;</code>打头，并通过名称来指出类型</li>
+<li>具体化优先于常规模板，而<strong>非模板函数优先于具体化和常规模板</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 用于交换job结构体的非模板函数、模板函数和具体化的原型：</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(job &amp;, job &amp;)</span></span>;<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-type">void</span> Swap &lt;T &amp;a, T &amp;b&gt;;<br><br><span class="hljs-keyword">template</span>&lt;&gt; <span class="hljs-type">void</span> <span class="hljs-built_in">Swap</span>&lt;job&gt;(job &amp;a, job &amp;b);<br></code></pre></td></tr></table></figure>
+
+<h4 id="实例化和具体化"><a href="#实例化和具体化" class="headerlink" title="实例化和具体化"></a>实例化和具体化</h4><p>实例化：</p>
+<ul>
+<li><p>隐式实例化：编译器使用模板为特定类型生成函数定义时，得到的是模板实例</p>
+</li>
+<li><p>显式实例化：直接命令编译器创建特定的实例</p>
+<p>Swap函数声明：<code>template void Swap&lt;int&gt;(int, int)</code>，意思是使用Swap()模板生成int类型的函数定义。</p>
+</li>
+</ul>
+<p>显式具体化：<code>template&lt;&gt; void Swap&lt;int&gt;(int &amp;, int &amp;);</code>意思是不要使用通用Swap模板来生成函数定义，而应使用专门为int类型显式的定义的函数定义。（专门定制）</p>
+<blockquote>
+<p>显示具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/c/">c++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/c/">c++</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/11/c++/c-7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">c++基础知识(7)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/11/c++/c-5/">
+                        <span class="hidden-mobile">c++基础知识(5)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/3%20(1).jpg">
+  <link rel="icon" href="/img/3%20(1).jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="c++ primer plus第九章知识，包括文件的单独编译、存储持续性、作用域、链接性、名称空间。">
+  <meta name="author" content="Yankel">
+  <meta name="keywords" content="">
+  <meta name="description" content="c++ primer plus第九章知识，包括文件的单独编译、存储持续性、作用域、链接性、名称空间。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++基础知识(7)">
+<meta property="og:url" content="http://yankel.github.com/2023/08/11/c++/c-7/index.html">
+<meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="c++ primer plus第九章知识，包括文件的单独编译、存储持续性、作用域、链接性、名称空间。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-11T03:53:09.000Z">
+<meta property="article:modified_time" content="2023-08-11T03:56:14.639Z">
+<meta property="article:author" content="Yankel">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>c++基础知识(7) - Yankel</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yankel.github.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"563a1ae07198a9b57a53f93c88e5f1ed","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yank3l&#39;s universe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/1%20(9).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="c++基础知识(7)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-11 11:53" pubdate>
+        2023年8月11日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">c++基础知识(7)</h1>
+            
+            <div class="markdown-body">
+              <p>c++ primer plus第九章知识，包括文件的单独编译、存储持续性、作用域、链接性、名称空间。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="单独编译"><a href="#单独编译" class="headerlink" title="单独编译"></a>单独编译</h3><p>通常，可以将一个程序分为三部分</p>
+<ol>
+<li>头文件：包含结构声明和使用这些结构的函数的原型(.h)<ul>
+<li>函数原型</li>
+<li>使用#define或const定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+</li>
+<li>源代码文件：包含与结构相关的函数的代码(.cpp)</li>
+<li>源代码文件：包含调用与结构相关的函数的代码（.cpp）</li>
+</ol>
+<blockquote>
+<p>假设有一个头文件coordin.h，#include时有两种形式：</p>
+<p>使用&lt;coordin.h&gt;时，c++编译器将在存储标准头文件的主机系统的文件系统中查找；</p>
+<p>使用”coordin.h”时，则编译器 将首先查找当前的工作目录或源代码目录，如果在那里没有找到头文件，则将在标准位置查找。</p>
+<p>因此在包含自己的头文件时，应该使用引号而不是尖括号</p>
+</blockquote>
+<p><strong>头文件管理</strong></p>
+<p>在同一个文件中只能将一个头文件包含一次，但是在编写代码时很有可能会将头文件包含多次。可以使用预编译器指令#ifndef(if not define)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//头文件 &quot;coordin.h&quot;</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> COORFIN_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> COORFIN_H_</span><br>···<br>...<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br></code></pre></td></tr></table></figure>
+
+<p>例子：假设有一个cpp文件，其作用是将直角坐标转换为极坐标</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cmath&gt;</span></span><br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">polar</span><br>&#123;<br>    <span class="hljs-type">double</span> distance;<br>    <span class="hljs-type">double</span> angle;<br>&#125;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">rect</span><br>&#123;<br>    <span class="hljs-type">double</span> x;<br>    <span class="hljs-type">double</span> y;<br>&#125;<br><br><span class="hljs-function">polar <span class="hljs-title">rect_to_polar</span><span class="hljs-params">(rect xypos)</span></span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">show_polar</span><span class="hljs-params">(polar dapos)</span></span>;<br>    <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    rect rplace;<br>    polar pplace;<br>    <br>    cout &lt;&lt; <span class="hljs-string">&quot;Enter the x and y: &quot;</span>;<br>    <span class="hljs-keyword">while</span>(cin &gt;&gt; rplace.x &gt;&gt; rplace.y)<br>    &#123;<br>        pplace = <span class="hljs-built_in">rect_to_polar</span>(rplace);<br>        <span class="hljs-built_in">show_polar</span>(pplace);<br>        cout &lt;&lt; <span class="hljs-string">&quot;Next two numbers (q to quit): &quot;</span>;<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Done.\n&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function">polar <span class="hljs-title">rect_to_polar</span><span class="hljs-params">(rect xypos)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    polar answer;<br>    <br>    answer.distance = <span class="hljs-built_in">sqrt</span>( xypos.x *xypos.x + xypos.y * xypos.y );<br>    answer.angle = <span class="hljs-built_in">atan2</span>(xypos.x, xypos.y);<br>    <span class="hljs-keyword">return</span> answer;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">show_polar</span><span class="hljs-params">(polar dapos)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    <span class="hljs-type">const</span> <span class="hljs-type">double</span> Rad_to_deg = <span class="hljs-number">57.29577951</span>;<br>    <br>    cout &lt;&lt; <span class="hljs-string">&quot;distance  = &quot;</span> &lt;&lt; dapos.distance;<br>    cout &lt;&lt; <span class="hljs-string">&quot;, angle = &quot;</span> &lt;&lt; dapos.angle * Rad_to_deg;<br>    cout &lt;&lt; <span class="hljs-string">&quot; degree\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以将以上代码拆分为”coordin.h”、file1.cpp 、file2.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//&quot;coordin.h&quot;</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> COORFIN_H_</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> COORFIN_H_</span><br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">polar</span><br>&#123;<br>    <span class="hljs-type">double</span> distance;<br>    <span class="hljs-type">double</span> angle;<br>&#125;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">rect</span><br>&#123;<br>    <span class="hljs-type">double</span> x;<br>    <span class="hljs-type">double</span> y;<br>&#125;<br><br><span class="hljs-function">polar <span class="hljs-title">rect_to_polar</span><span class="hljs-params">(rect xypos)</span></span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">show_polar</span><span class="hljs-params">(polar dapos)</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// file1.cpp</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;coordin.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    rect rplace;<br>    polar pplace;<br>    <br>    cout &lt;&lt; <span class="hljs-string">&quot;Enter the x and y: &quot;</span>;<br>    <span class="hljs-keyword">while</span>(cin &gt;&gt; rplace.x &gt;&gt; rplace.y)<br>    &#123;<br>        pplace = <span class="hljs-built_in">rect_to_polar</span>(rplace);<br>        <span class="hljs-built_in">show_polar</span>(pplace);<br>        cout &lt;&lt; <span class="hljs-string">&quot;Next two numbers (q to quit): &quot;</span>;<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Done.\n&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// file2.cpp</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&quot;coordin.h&quot;</span></span><br><br><span class="hljs-function">polar <span class="hljs-title">rect_to_polar</span><span class="hljs-params">(rect xypos)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    polar answer;<br>    <br>    answer.distance = <span class="hljs-built_in">sqrt</span>( xypos.x *xypos.x + xypos.y * xypos.y );<br>    answer.angle = <span class="hljs-built_in">atan2</span>(xypos.x, xypos.y);<br>    <span class="hljs-keyword">return</span> answer;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">show_polar</span><span class="hljs-params">(polar dapos)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>    <span class="hljs-type">const</span> <span class="hljs-type">double</span> Rad_to_deg = <span class="hljs-number">57.29577951</span>;<br>    <br>    cout &lt;&lt; <span class="hljs-string">&quot;distance  = &quot;</span> &lt;&lt; dapos.distance;<br>    cout &lt;&lt; <span class="hljs-string">&quot;, angle = &quot;</span> &lt;&lt; dapos.angle * Rad_to_deg;<br>    cout &lt;&lt; <span class="hljs-string">&quot; degree\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>编译链接生成一个可执行程序</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">g</span><span class="hljs-literal">++</span> <span class="hljs-comment">file1</span><span class="hljs-string">.</span><span class="hljs-comment">cpp file2</span><span class="hljs-string">.</span><span class="hljs-comment">cpp</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="存储持续性、作用域和链接性"><a href="#存储持续性、作用域和链接性" class="headerlink" title="存储持续性、作用域和链接性"></a>存储持续性、作用域和链接性</h3><p>c++使用三种（在c++11中是四周）不同的方案来存储数据，这些方案的区别在于数据保留在内存中的时间。</p>
+<ul>
+<li><strong>自动存储持续性：</strong>在<strong>函数定义中声明的变量</strong>（包括函数参数）的存储持续性为自动的。它们在程序开始执行其所属的函数或代码块时被创建，在执行完函数或代码块时，它们使用的内存被释放。c++有两种存储持续性为自动的变量。</li>
+<li><strong>静态存储持续性：</strong> <strong>在函数定义外定义的变量和使用关键字static定义的变量</strong>的存储持续性都为静态。它们在程序整个运行过程中都存在。c++有3种存储持续性为静态的变量。</li>
+<li><strong>线程存储持续性（c++11）：</strong>当前，多核处理器很常见，这些CPU可同时处理多个执行任务。这让程序能够将计算放在可并行处理的不同线程中。如果变量是使用关键字thread_local声明的，则其生命周期与所属的线程一样长。</li>
+<li><strong>动态存储持续性：</strong>用new运算符分配的内存将一直存在，直到使用delete运算符将其释放或程序结束为止。这种内存的存储持续性为动态，有时被称为自由存储或堆。</li>
+</ul>
+<h4 id="作用域和链接"><a href="#作用域和链接" class="headerlink" title="作用域和链接"></a>作用域和链接</h4><p>作用域描述了名称在文件的多大范围内可见。</p>
+<blockquote>
+<p>例如，函数中定义的变量可在该函数中使用，但不能在其他函数中使用</p>
+</blockquote>
+<p>链接性描述了名称如何在不同单元间共享。<strong>链接性为外部的名称可在文件间共享，链接性为内部的名称只能由一个文件中中的函数共享。自动变量的名称没有链接性</strong>，因为它们不能共享。</p>
+<h4 id="自动存储持续性"><a href="#自动存储持续性" class="headerlink" title="自动存储持续性"></a>自动存储持续性</h4><p>在默认情况下，在函数中声明的函数参数和变量的存储持续性为自动，作用域为局部，没有链接性。</p>
+<p>自动变量是存储在栈中的</p>
+<h4 id="静态持续变量"><a href="#静态持续变量" class="headerlink" title="静态持续变量"></a>静态持续变量</h4><p>c++为静态存储持续性变量提供了3种链接性：</p>
+<ul>
+<li>外部链接性（可在其他文件中访问）</li>
+<li>内部链接性（只能在当前文件中访问）</li>
+<li>无链接性（只能在当前函数或代码块中访问）</li>
+</ul>
+<p>这3种链接性都在整个程序执行期间存在。</p>
+<table>
+<thead>
+<tr>
+<th>存储描述</th>
+<th>持续性</th>
+<th>作用域</th>
+<th>链接性</th>
+<th>如何声明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>静态，无链接性</td>
+<td>静态</td>
+<td>代码块</td>
+<td>无</td>
+<td>在代码块中，使用关键字static</td>
+</tr>
+<tr>
+<td>静态，外部链接性</td>
+<td>静态</td>
+<td>文件</td>
+<td>外部</td>
+<td>不在任何函数中</td>
+</tr>
+<tr>
+<td>静态，内部链接性</td>
+<td>静态</td>
+<td>文件</td>
+<td>内部</td>
+<td>不在任何函数中，使用关键字static</td>
+</tr>
+</tbody></table>
+<h4 id="静态持续性、外部链接性"><a href="#静态持续性、外部链接性" class="headerlink" title="静态持续性、外部链接性"></a>静态持续性、外部链接性</h4><p>链接性为外部的变量通常称为外部变量，它们的存储持续性为静态，作用域为整个文件。外部变量是在函数外部定义的，因此对所有函数而言都是外部的。外部变量也称全局变量。</p>
+<p><strong>单定义规则</strong></p>
+<p>一方面，在每一个使用外部变量的文件中，都必须声明它；另一方面，c++有“单定义规则”，该规则指出，变量只能有一次定义。</p>
+<p>因此，c++提供了两种变量声明：</p>
+<ul>
+<li>一种是定义声明，它给变量分配存储空间</li>
+<li>另一种是引用声明，它不给变量分配空间，因为它引用已有的变量</li>
+</ul>
+<p>引用声明使用关键字<code>extern</code>，且不进行初始化；否则，声明变为定义，导致分配存储空间：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">double</span> up;<span class="hljs-comment">//定义 up=0</span><br><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> blem;<span class="hljs-comment">//引用</span><br><span class="hljs-keyword">extern</span> <span class="hljs-type">char</span> gr = <span class="hljs-string">&#x27;z&#x27;</span><span class="hljs-comment">//定义</span><br></code></pre></td></tr></table></figure>
+
+<p>如果要在多个文件中使用外部变量，只需在一个文件中包含该变量的定义，但在使用该变量的其他所有文件中，都必须使用关键字<code>extern</code>声明它：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// file1.cpp</span><br><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> cats = <span class="hljs-number">20</span>;<br><span class="hljs-type">int</span> dogs = <span class="hljs-number">22</span>;<br><span class="hljs-type">int</span> fleas<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// file2.cpp</span><br><span class="hljs-comment">//  use cats and dogs from file1.cpp</span><br><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> cats;<br><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> dogs;<br></code></pre></td></tr></table></figure>
+
+<p>如果在函数中声明了一个与外部变量同名的变量，这种声明将被视为一个自动变量的定义，当程序执行自动变量所属的函数时，该函数位于作用域内。如果想在该函数内使用同名的外部变量，可以使用作用域解析运算符<code>::</code>，该运算符表示将使用变量的全局版本。</p>
+<h4 id="静态持续性、内部链接性"><a href="#静态持续性、内部链接性" class="headerlink" title="静态持续性、内部链接性"></a>静态持续性、内部链接性</h4><p>将<code>static</code>限定符用于作用域为整个文件的变量时，该变量的链接性将为内部的。即变量只能在其所属的文件中使用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//file1</span><br><span class="hljs-type">int</span> error = <span class="hljs-number">20</span>; <span class="hljs-comment">//</span><br><br>-------------------<br><span class="hljs-comment">//file2</span><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> error = <span class="hljs-number">5</span>;<span class="hljs-comment">//只在file2中可见</span><br><span class="hljs-type">void</span> froobish<br>&#123;<br>	cout &lt;&lt; error;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="静态存储持续性、无链接性"><a href="#静态存储持续性、无链接性" class="headerlink" title="静态存储持续性、无链接性"></a>静态存储持续性、无链接性</h4><p>将<code>static</code>限定符用于在代码块中定义的变量，将导致局部变量的存储持续性为静态的。这意味着虽然该变量只在该代码块中可用，但是它在该代码块不处于活动状态时仍然存在。因此在两次函数调用之间，静态局部变量的值将保持不变。</p>
+<p>如果初始化了静态局部变量，则程序只在启动时进行一次初始化。</p>
+<h4 id="说明符和限定符"><a href="#说明符和限定符" class="headerlink" title="说明符和限定符"></a>说明符和限定符</h4><p> 有些被称为存储说明符或cv-限定符的c++关键字提供了其他有关存储的信息。下面是存储说明符</p>
+<ul>
+<li><p>auto（在c++11中不再是说明符）</p>
+<blockquote>
+<p>c++11之前，可以使在声明中使用关键字auto指出变量是自动变量；但在c++11中，苏通用于自动类型判断</p>
+</blockquote>
+</li>
+<li><p>register</p>
+<blockquote>
+<p>关键字register用于在声明中指示寄存器存储，而在c++11中，它只是显式地指出变量是自动的</p>
+</blockquote>
+</li>
+<li><p>static</p>
+<blockquote>
+<p>关键字static被用在作用域为生个文件的声明中时，表示内部链接性；被用于局部声明中，表示局部变量的存储持续性为静态的</p>
+</blockquote>
+</li>
+<li><p>extern</p>
+<blockquote>
+<p>关键字extern表明是引用声明，即声明引用在其他地方定义的变量。</p>
+</blockquote>
+</li>
+<li><p>thread_local（c++新增的）</p>
+<blockquote>
+<p>关键字thread_local指出变量的持续性与其所属线程的持续性相同</p>
+</blockquote>
+</li>
+<li><p>mutable</p>
+<blockquote>
+<p>关键字mutable表明，即使结构体（或类）变量为const，其某个成员也可以被修改。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">data</span><br>&#123;<br> <span class="hljs-type">char</span> name [<span class="hljs-number">30</span>];<br> <span class="hljs-keyword">mutable</span> <span class="hljs-type">int</span> accesses;<br> ...<br>&#125;;<br><span class="hljs-type">const</span> data veep =&#123;<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-number">0</span>, ...&#125;;<br><span class="hljs-built_in">strcpy</span>(veep.name,<span class="hljs-string">&quot;Bob&quot;</span>);<span class="hljs-comment">// not allowed</span><br>veep.accesses++;<span class="hljs-comment">//allowed </span><br></code></pre></td></tr></table></figure>
+
+</blockquote>
+</li>
+</ul>
+<p><strong>cv-限定符</strong></p>
+<ul>
+<li><p>const</p>
+<blockquote>
+<p>关键字const表明，内存被初始化后，程序不能再对它进行修改。</p>
+<p>在c++中，const限定度对默认存储类型稍有影响。在默认情况下全局变量的链接性为外部的，但const全局变量的链接性为内部的。即在c++看来，全局const定义就像使用了static说明符一样。</p>
+</blockquote>
+</li>
+<li><p>volatile</p>
+</li>
+</ul>
+<blockquote>
+<p>关键字volatile表明，即使程序代码没有对内存单元进行修改，其值也可能发生改变。</p>
+</blockquote>
+<h4 id="存储方案和动态分配"><a href="#存储方案和动态分配" class="headerlink" title="存储方案和动态分配"></a>存储方案和动态分配</h4><p><strong>使用new运算符初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//为内置的标量类型分配存储空间并初始化</span><br><span class="hljs-type">int</span> *pi = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span> (<span class="hljs-number">6</span>);<br><span class="hljs-type">double</span> * pd = <span class="hljs-keyword">new</span> <span class="hljs-built_in">double</span>(<span class="hljs-number">99.99</span>);<br><br><span class="hljs-comment">//初始化常规结构体和数组</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">where</span> <br>&#123;<br>    <span class="hljs-type">double</span> x;<br>    <span class="hljs-type">double</span> y;<br>    <span class="hljs-type">double</span> z;<br>&#125;<br>where * one = <span class="hljs-keyword">new</span> where&#123;<span class="hljs-number">2.3</span>, <span class="hljs-number">4.6</span>, <span class="hljs-number">7.4</span>&#125;;<br><span class="hljs-type">int</span> * ar = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span> [<span class="hljs-number">4</span>] &#123;<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>new失败时</strong></p>
+<p>引发异常<code>std::bad_alloc</code></p>
+<p><strong>定位new运算符</strong></p>
+<p>通常，<code>new</code>复杂在堆里找一个能够满足要求的内存块。<code>new</code>运算符还有一种变体，被称为<code>定位new运算符</code>，能够让开发者指定要使用的位置。</p>
+<p>要使用定位new特性，首先要包含头文件<code>new</code>，然后将<code>new</code>运算符用于提供了所需地址的参数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//演示new运算符的4种用法</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;new&gt;</span></span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">chaff</span><br>&#123;<br>    <span class="hljs-type">char</span> dross[<span class="hljs-number">20</span>];<br>    <span class="hljs-type">int</span> slag;<br>&#125;<br><span class="hljs-type">char</span> buffer1[<span class="hljs-number">50</span>];<br><span class="hljs-type">char</span> buffer2[<span class="hljs-number">500</span>];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    chaff *p1, *p2;<br>    <span class="hljs-type">int</span> *p3, *p4;<br>    <span class="hljs-comment">// new运算符常规用法</span><br>    p1 = <span class="hljs-keyword">new</span> chaff;<br>    p3 = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">20</span>];<br>    <br>    <span class="hljs-comment">//定位new运算符</span><br>    p2 = <span class="hljs-built_in">new</span> (buffer1) chaff;<br>    p4 = <span class="hljs-built_in">new</span> (buffer2) <span class="hljs-type">int</span> [<span class="hljs-number">20</span>];<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不能使用delete来释放定位new运算符分配的内存</p>
+</blockquote>
+<h3 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a>名称空间</h3><p>在c++中，名称可以是变量、函数、结构、枚举、类以及类和结构的成员。当随着项目的增大，名称相互冲突的可能性也将增加。使用多个厂商的类库时，可能导致名称冲突。例如，两个库都定义了名为List、Tree和Node的库，但定义的方式不兼容。用户可能希望使用一个库的List类，而使用另一个库的Tree类，这种冲突被称为名称空间问题。</p>
+<p>c++通过定义一种新的声明区域来创建命名的名称空间，这样做的目的之一是提供一个声明名称的区域。一个名称空间中的名称不会与另外一个名称空间的相同名称发生冲突，同时允许程序的其他部分使用该名称空间中声明的东西。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> Jack<br>&#123;<br>    <span class="hljs-type">double</span> pail;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">fetch</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-type">int</span> pal;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Well</span>&#123;...&#125;;<br>&#125;<br><br><span class="hljs-keyword">namespace</span> Jill<br>&#123;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">bucket</span><span class="hljs-params">(<span class="hljs-type">double</span> n)</span></span>&#123;&#125;<br>    <span class="hljs-type">double</span> fetch;<br>    <span class="hljs-type">int</span> pal;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hill</span>&#123;...&#125;;<br>&#125;<br><br><br>Jack::pail = <span class="hljs-number">12.34</span>;<br>Jill::Hill mole; <span class="hljs-comment">// creat a type Hill structure</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>using声明和using编译指令</strong></p>
+<p><strong>using声明使特定的标识符可用，using编译指令使整个名称空间可用</strong></p>
+<p>using声明由被限定的名称和它前面的关键字using组成。using声明将特定的名称添加到它所属的声明区域中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> Jill<br>&#123;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">bucket</span><span class="hljs-params">(<span class="hljs-type">double</span> n)</span></span>&#123;&#125;<br>    <span class="hljs-type">double</span> fetch;<br>    <span class="hljs-type">int</span> pal;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hill</span>&#123;...&#125;;<br>&#125;<br><span class="hljs-type">char</span> fetch;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> Jill::fetch;<br>    <span class="hljs-type">double</span> fetch;<span class="hljs-comment">//error!!</span><br>    cin &gt;&gt; fetch; <span class="hljs-comment">//read a value into Jill::fetch</span><br>    cin &gt;&gt; ::fetch;<span class="hljs-comment">// read a value into global fetch</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>using编译指令使所有的名称都可用。using编译指令由名称空间名和它前面的关键字<code>using namespace</code>组成，它使名称空间中的所有名称都可用，而不需要使用作用域解析运算符。</p>
+<p><strong>using编译指令和using声明的比较</strong></p>
+<p>使用using编译指令导入一个名称空间的所有名称和使用多个using声明使不一样的。<strong>使用using声明时</strong>，就好像声明了相应的名称一样。<strong>如果某个名称已经在函数中声明了，则不能使用using声明导入相同的名称。</strong></p>
+<p>使用using编译指令时，将进行名称解析，就像在包含using声明和名称空间本身的最小声明区域中声明了名称一样。如果使用using编译指令导入了一个已经在函数中声明的名称，则局部名称将隐藏名称空间名。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">namespace</span> Jill<br>&#123;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">bucket</span><span class="hljs-params">(<span class="hljs-type">double</span> n)</span></span>&#123;&#125;<br>    <span class="hljs-type">double</span> fetch;<br>    <span class="hljs-type">int</span> pal;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hill</span>&#123;...&#125;;<br>&#125;<br><br><span class="hljs-type">char</span> fetch; <span class="hljs-comment">// global namespace</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> Jill;<br>    Hill Thrill;<span class="hljs-comment">//create a type Jill::Hill strcuture</span><br>    <span class="hljs-type">double</span> water = <span class="hljs-built_in">bucket</span>(<span class="hljs-number">2</span>);<span class="hljs-comment">//use Jill::bucket()</span><br>    <span class="hljs-type">double</span> fetch;<span class="hljs-comment">//not an error,hides Jill::fetch</span><br>    cin &gt;&gt; fetch;<span class="hljs-comment">//read a value into the local fetch</span><br>    cin &gt;&gt; ::fetch;<span class="hljs-comment">//read a value into the global fetch</span><br>    cin &gt;&gt; Jill::fetch;<span class="hljs-comment">//read a value into the Jill fetch</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/c/">c++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/c/">c++</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/11/c++/c-8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">c++基础知识(8)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/11/c++/c-6/">
+                        <span class="hidden-mobile">c++基础知识(6)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

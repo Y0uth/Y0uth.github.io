@@ -15,20 +15,23 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="c++中的左值与右值、左值引用与右值引用。">
   <meta name="author" content="Yankel">
   <meta name="keywords" content="">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="隐私计算(2)-秘密共享">
-<meta property="og:url" content="http://yankel.github.com/2023/07/04/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%972-%E7%A7%98%E5%AF%86%E5%85%B1%E4%BA%AB/index.html">
+  <meta name="description" content="c++中的左值与右值、左值引用与右值引用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左值与右值">
+<meta property="og:url" content="http://yankel.github.com/2023/08/11/c++/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/index.html">
 <meta property="og:site_name" content="Yankel">
+<meta property="og:description" content="c++中的左值与右值、左值引用与右值引用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-04T08:57:53.000Z">
-<meta property="article:modified_time" content="2023-07-04T08:58:20.476Z">
+<meta property="article:published_time" content="2023-08-11T03:57:36.000Z">
+<meta property="article:modified_time" content="2023-08-11T04:06:38.437Z">
 <meta property="article:author" content="Yankel">
+<meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>隐私计算(2)-秘密共享 - Yankel</title>
+  <title>左值与右值 - Yankel</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -174,7 +177,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="隐私计算(2)-秘密共享">
+            <span class="h2" id="subtitle" title="左值与右值">
               
             </span>
 
@@ -184,8 +187,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-07-04 16:57" pubdate>
-        2023年7月4日 下午
+      <time datetime="2023-08-11 11:57" pubdate>
+        2023年8月11日 中午
       </time>
     </span>
   
@@ -195,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.3k 字
     </span>
   
 
@@ -204,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      4 分钟
     </span>
   
 
@@ -233,15 +236,92 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">隐私计算(2)-秘密共享</h1>
+            <h1 style="display: none">左值与右值</h1>
             
             <div class="markdown-body">
-              
+              <p>c++中的左值与右值、左值引用与右值引用。</p>
+<span id="more"></span>
+
+<h2 id="左值与右值"><a href="#左值与右值" class="headerlink" title="左值与右值"></a>左值与右值</h2><h3 id="左值与右值的概念"><a href="#左值与右值的概念" class="headerlink" title="左值与右值的概念"></a>左值与右值的概念</h3><p>左值指既能够出现在等号左边，也能出现在等号右边的变量；右值则是只能出现在等号右边的变量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;<span class="hljs-comment">//a是左值，10是右值</span><br><span class="hljs-type">int</span> b = a;<span class="hljs-comment">// b是左值</span><br><span class="hljs-type">int</span> c = a + b;<span class="hljs-comment">//a+b是右值</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>左值</strong></p>
+<p>左值具有以下特征：</p>
+<ul>
+<li><strong>可通过取地址运算符获取其地址</strong></li>
+<li>可修改的左值可用作内建赋值和内建符合赋值运算符的左操作数</li>
+<li>可以用来初始化左值引用</li>
+</ul>
+<p>常见的左值：</p>
+<ul>
+<li>变量名、函数名以及数据成员名</li>
+<li>返回左值引用的函数调用</li>
+<li>由赋值运算符或复合赋值运算符连接的表达式，如(a&#x3D;b, a-&#x3D;b等)</li>
+<li>解引用表达式*ptr</li>
+<li>前置自增和自减表达式(++a, ++b)</li>
+<li>成员访问（点）运算符的结果</li>
+<li>由指针访问成员（ <code>-&gt;</code> ）运算符的结果</li>
+<li>下标运算符的结果(<code>[]</code>)</li>
+<li>字符串字面值(“abc”)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a = <span class="hljs-number">1</span>; <span class="hljs-comment">// a是左值</span><br><span class="hljs-function">T&amp; <span class="hljs-title">f</span><span class="hljs-params">()</span></span>;<br><span class="hljs-built_in">f</span>();<span class="hljs-comment">//左值</span><br>++a;<span class="hljs-comment">//左值</span><br>--a;<span class="hljs-comment">//左值</span><br><span class="hljs-type">int</span> b = a;<span class="hljs-comment">//a和b都是左值</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">S</span>* ptr = &amp;obj; <span class="hljs-comment">// ptr为左值</span><br>arr[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>; <span class="hljs-comment">// 左值</span><br><span class="hljs-type">int</span> *p = &amp;a; <span class="hljs-comment">// p为左值</span><br>*p = <span class="hljs-number">10</span>; <span class="hljs-comment">// *p为左值</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>&#123;&#125;;<br>MyClass c; <span class="hljs-comment">// c为左值</span><br><span class="hljs-string">&quot;abc&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>右值</strong></p>
+<p>以下表达式的值都是纯右值：</p>
+<ul>
+<li>字面值(字符串字面值除外)，例如1，’a’, true等</li>
+<li>返回值为非引用的函数调用或操作符重载，例如：str.substr(1, 2), str1 + str2, or it++</li>
+<li>后置自增和自减表达式(a++, a–)</li>
+<li>算术表达式</li>
+<li>逻辑表达式</li>
+<li>比较表达式</li>
+<li>取地址表达式</li>
+<li>lambda表达式</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-literal">nullptr</span>;<br><span class="hljs-literal">true</span>;<br><span class="hljs-number">1</span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span></span>;<br><span class="hljs-built_in">fun</span>();<br><br><span class="hljs-type">int</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> b = <span class="hljs-number">2</span>;<br>a + b;<br><br>a++;<br>b--;<br><br>a &gt; b;<br>a &amp;&amp; b;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="左值引用和右值引用"><a href="#左值引用和右值引用" class="headerlink" title="左值引用和右值引用"></a>左值引用和右值引用</h3><p>在C++11之前，引用分为左值引用和常量左值引用两种，但是自C++11起，引入了右值引用，也就是说，在C++11中，包含如下3中引用：</p>
+<ul>
+<li>左值引用</li>
+<li>常量左值引用(不希望被修改)</li>
+<li>右值引用</li>
+</ul>
+<p>在C++11中引入了右值引用，因为右值的生命周期很短，右值引用的引入，使得可以延长右值的生命周期。在C++中规定，<strong>右值引用是&amp;&amp;即由2个&amp;表示，而左值引用是一个&amp;表示</strong>。C++11中右值引用可以实现“移动语义”。右值引用的作用是为了<code>绑定右值</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> &amp;rb = a; <span class="hljs-comment">// rb为左值引用</span><br><span class="hljs-type">int</span> &amp;&amp;rrb = a; <span class="hljs-comment">// 错误，a是左值，右值引用不能绑定左值</span><br><span class="hljs-type">int</span> &amp;&amp;rrb1 = <span class="hljs-number">1</span>; <span class="hljs-comment">// 正确，1为右值</span><br><span class="hljs-type">int</span> &amp;rb1 = i * <span class="hljs-number">2</span>; <span class="hljs-comment">// 错误，i * 2是右值，而rb1为左值引用</span><br><span class="hljs-type">int</span> &amp;&amp;rrb2 = i * <span class="hljs-number">2</span>; <span class="hljs-comment">// 正确</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;c = <span class="hljs-number">1</span>; <span class="hljs-comment">// 正确</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;c1 = i * <span class="hljs-number">2</span>; <span class="hljs-comment">// 正确</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/513628368">深入理解左值和右值 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://nettee.github.io/posts/2018/Understanding-lvalues-and-rvalues-in-C-and-C/">理解 C&#x2F;C++ 中的左值和右值 | nettee 的 blog</a></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/c/">c++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/c/">c++</a>
+                    
+                  </div>
                 
               </div>
               
@@ -256,18 +336,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/11/c++/c-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">c++基础知识(1)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/04/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%97/">
-                        <span class="hidden-mobile">隐私计算(1)</span>
+                      <a href="/2023/08/11/c++/cin%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">cin的使用方法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
